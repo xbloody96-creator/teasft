@@ -1,14 +1,36 @@
 /**
- * BEAUTÉ — Premium Cosmetics Shop
- * Main JavaScript
+ * GLOW — Premium Cosmetics Shop
+ * Main JavaScript - Full Functionality
  */
+
+// ===================================
+// Global State
+// ===================================
+let cart = [];
+let favorites = [];
+let currentUser = null;
+let currentFontSize = 16;
+let isHighContrast = false;
+let currentSlide = 0;
+let sliderInterval;
+let giftAmount = 3000;
+let deliveryCost = 0;
+
+// Product Database
+const products = [
+    { id: 1, brand: 'LA ROCHE-POSAY', name: 'Гиалуроновая сыворотка Hyalu B5', price: 2890, rating: 4.9, reviews: 128, category: 'hit', image: '🧴', description: 'Интенсивно увлажняющая сыворотка с гиалуроновой кислотой' },
+    { id: 2, brand: 'CLINIQUE', name: 'Увлажняющий крем Moisture Surge', price: 3450, rating: 4.8, reviews: 95, category: 'new', image: '💧', description: 'Легкий гель-крем для мгновенного увлажнения' },
+    { id: 3, brand: 'THE ORDINARY', name: 'Ниацинамид 10% + Цинк 1%', price: 890, rating: 4.7, reviews: 312, category: 'hit', image: '⚗️', description: 'Сыворотка для сужения пор и контроля себума' },
+    { id: 4, brand: 'ESTEE LAUDER', name: 'Сыворотка Advanced Night Repair', price: 7200, rating: 5.0, reviews: 256, category: 'hit', image: '✨', description: 'Восстанавливающая сыворотка для ночного ухода' },
+    { id: 5, brand: 'CAUDALIE', name: 'Виноградная вода спрей', price: 1250, rating: 4.6, reviews: 89, category: 'new', image: '🍇', description: 'Освежающий спрей для лица с виноградной водой' },
+    { id: 6, brand: 'BIODERMA', name: 'Мицеллярная вода Sensibio H2O', price: 1690, rating: 4.9, reviews: 445, category: 'hit', image: '💦', description: 'Деликатное очищение для чувствительной кожи' },
+    { id: 7, brand: 'DRUNK ELEPHANT', name: 'Витамин C сыворотка C-Firma', price: 8900, rating: 4.8, reviews: 167, category: 'new', image: '🍊', description: 'Осветляющая сыворотка с витамином C' },
+    { id: 8, brand: 'PAULA'S CHOICE', name: 'BHA эксфолиант 2%', price: 3200, rating: 4.9, reviews: 523, category: 'sale', image: '🧪', description: 'Жидкий пилинг для гладкой кожи' }
+];
 
 // ===================================
 // Accessibility Panel
 // ===================================
-let currentFontSize = 16;
-let isHighContrast = false;
-
 function toggleA11y() {
     const panel = document.getElementById('a11yPanel');
     panel.classList.toggle('active');
@@ -33,6 +55,7 @@ function setTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
     document.body.classList.toggle('dark-theme', theme === 'dark');
     document.body.classList.toggle('light-theme', theme === 'light');
+    localStorage.setItem('theme', theme);
 }
 
 // ===================================
