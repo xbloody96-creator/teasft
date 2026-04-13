@@ -1,1105 +1,318 @@
 <!DOCTYPE html>
-<html lang="ru" data-theme="light">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GLOW — Премиум косметика и beauty-услуги</title>
+    <title>GLOW Cosmetics - Главная</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600;700&family=Unbounded:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="light-theme">
-
-<!-- Accessibility Panel -->
-<div class="a11y-panel" id="a11yPanel">
-    <div class="a11y-content">
-        <button class="a11y-close" onclick="toggleA11y()">✕</button>
-        <h3>Настройки доступности</h3>
-        <div class="a11y-group">
-            <label>Размер шрифта</label>
-            <div class="a11y-buttons">
-                <button onclick="adjustFont(-1)">A−</button>
-                <button onclick="adjustFont(1)">A+</button>
-                <button onclick="resetFont()">Сброс</button>
-            </div>
-        </div>
-        <div class="a11y-group">
-            <label>Контрастность</label>
-            <div class="a11y-buttons">
-                <button onclick="toggleContrastMode()">Высокий контраст</button>
-            </div>
-        </div>
-        <div class="a11y-group">
-            <label>Тема</label>
-            <div class="a11y-buttons">
-                <button onclick="setTheme('light')">☀️ Светлая</button>
-                <button onclick="setTheme('dark')">🌙 Тёмная</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Header -->
-<header class="main-header">
-    <div class="header-top">
-        <div class="container header-top-inner">
-            <div class="header-message">
-                <span class="message-icon">✨</span>
-                <span class="message-text">Бесплатная доставка от 3000 ₽ • Подарки в каждом заказе</span>
-            </div>
-            <div class="header-meta">
-                <a href="tel:+78001234567" class="contact-link">8 (800) 123-45-67</a>
-                <button class="a11y-trigger" onclick="toggleA11y()" title="Версия для слабовидящих">
-                    <span class="eye-icon">👁</span>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <div class="header-main">
-        <div class="container header-main-inner">
-            <a href="/" class="brand-logo">
-                <div class="logo-symbol">G</div>
-                <div class="logo-wordmark">
-                    <span class="logo-main">GLOW</span>
-                    <span class="logo-tagline">beauty & care</span>
-                </div>
-            </a>
-
-            <nav class="main-nav">
-                <a href="#catalog" class="nav-link nav-catalog">
-                    <span class="nav-icon">▤</span>
-                    Каталог
-                </a>
-                <a href="#services" class="nav-link">Услуги</a>
-                <a href="#about" class="nav-link">О нас</a>
-                <a href="#blog" class="nav-link">Блог</a>
-                <a href="#contacts" class="nav-link">Контакты</a>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-content">
+            <a href="index.html" class="logo">GLOW</a>
+            
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link active">Главная</a></li>
+                    <li><a href="catalog.html" class="nav-link">Каталог</a></li>
+                    <li><a href="services.html" class="nav-link">Услуги</a></li>
+                    <li><a href="about.html" class="nav-link">О нас</a></li>
+                    <li><a href="contacts.html" class="nav-link">Контакты</a></li>
+                </ul>
             </nav>
-
+            
             <div class="header-actions">
-                <button class="action-btn search-trigger" onclick="toggleSearch()">
-                    <span class="btn-icon">🔍</span>
-                    <span class="btn-label desktop-only">Поиск</span>
+                <button class="icon-btn" id="theme-toggle" title="Переключить тему">🌓</button>
+                <a href="profile.html" class="icon-btn login-trigger" title="Профиль">👤</a>
+                <button class="icon-btn" id="cart-toggle" title="Корзина">
+                    🛒
+                    <span class="cart-count">0</span>
                 </button>
-                <button class="action-btn" onclick="openModal('favoritesModal')">
-                    <span class="btn-icon">♡</span>
-                    <span class="btn-label desktop-only">Избранное</span>
-                    <span class="cart-count" id="favoritesCount">0</span>
-                </button>
-                <button class="action-btn" onclick="openProfile()">
-                    <span class="btn-icon">👤</span>
-                    <span class="btn-label desktop-only" id="profileBtnText">Войти</span>
-                </button>
-                <button class="action-btn cart-btn" onclick="openCart()">
-                    <span class="btn-icon">🛍</span>
-                    <span class="btn-label desktop-only">Корзина</span>
-                    <span class="cart-count" id="cartCount">0</span>
-                </button>
-                <button class="mobile-menu-trigger" onclick="toggleMobileMenu()">
+                <div class="mobile-menu-toggle">
                     <span></span>
                     <span></span>
                     <span></span>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Search Overlay -->
-    <div class="search-overlay" id="searchOverlay">
-        <div class="search-container">
-            <button class="search-close" onclick="toggleSearch()">✕</button>
-            <form class="search-form" onsubmit="handleSearch(event)">
-                <input type="text" id="searchInput" placeholder="Что вы ищете сегодня?" class="search-input" autofocus>
-                <button type="submit" class="search-submit">Найти</button>
-            </form>
-            <div class="search-popular">
-                <span class="popular-label">Популярные запросы:</span>
-                <a href="#" class="popular-tag" onclick="searchByTag('сыворотка')">сыворотка</a>
-                <a href="#" class="popular-tag" onclick="searchByTag('крем')">крем для лица</a>
-                <a href="#" class="popular-tag" onclick="searchByTag('масло')">масло для волос</a>
-                <a href="#" class="popular-tag" onclick="searchByTag('spf')">spf защита</a>
-            </div>
-        </div>
-    </div>
-</header>
-
-<!-- Mobile Menu -->
-<div class="mobile-menu" id="mobileMenu">
-    <div class="mobile-menu-header">
-        <span class="mobile-menu-title">Меню</span>
-        <button class="mobile-menu-close" onclick="toggleMobileMenu()">✕</button>
-    </div>
-    <nav class="mobile-nav">
-        <a href="#catalog" onclick="toggleMobileMenu()">Каталог</a>
-        <a href="#services" onclick="toggleMobileMenu()">Услуги</a>
-        <a href="#about" onclick="toggleMobileMenu()">О нас</a>
-        <a href="#blog" onclick="toggleMobileMenu()">Блог</a>
-        <a href="#contacts" onclick="toggleMobileMenu()">Контакты</a>
-    </nav>
-    <div class="mobile-menu-footer">
-        <a href="tel:+78001234567" class="mobile-contact">8 (800) 123-45-67</a>
-        <div class="mobile-socials">
-            <a href="#">Telegram</a>
-            <a href="#">VK</a>
-            <a href="#">WhatsApp</a>
-        </div>
-    </div>
-</div>
-
-<main class="site-content">
-
-<!-- Hero Section with Slider -->
-<section class="hero-section">
-    <div class="hero-slider" id="heroSlider">
-        <div class="hero-slide active" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-            <div class="container hero-content">
-                <div class="hero-text">
-                    <span class="hero-badge">Новая коллекция 2025</span>
-                    <h1 class="hero-title">
-                        Раскройте свою<br>
-                        <em>естественную красоту</em>
-                    </h1>
-                    <p class="hero-description">
-                        Премиальная косметика с натуральными ингредиентами.<br>
-                        Создана профессионалами для тех, кто ценит качество.
-                    </p>
-                    <div class="hero-buttons">
-                        <a href="#catalog" class="btn btn-primary btn-large">
-                            Смотреть каталог
-                            <span class="btn-arrow">→</span>
-                        </a>
-                        <a href="#services" class="btn btn-outline btn-large">
-                            Наши услуги
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>
-        <div class="hero-slide" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-            <div class="container hero-content">
-                <div class="hero-text">
-                    <span class="hero-badge">Скидки до 40%</span>
-                    <h1 class="hero-title">
-                        Весеннее<br>
-                        <em>обновление</em>
-                    </h1>
-                    <p class="hero-description">
-                        Лучшие предложения на уходовую косметику.<br>
-                        Успейте купить со скидкой!
-                    </p>
-                    <div class="hero-buttons">
-                        <a href="#catalog?filter=sale" class="btn btn-primary btn-large">
-                            В каталог
-                            <span class="btn-arrow">→</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="hero-slide" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
-            <div class="container hero-content">
-                <div class="hero-text">
-                    <span class="hero-badge">Профессиональный уход</span>
-                    <h1 class="hero-title">
-                        Запишитесь на<br>
-                        <em>консультацию</em>
-                    </h1>
-                    <p class="hero-description">
-                        Наши эксперты подберут идеальный уход именно для вас.<br>
-                        Первая консультация бесплатно!
-                    </p>
-                    <div class="hero-buttons">
-                        <a href="#services" class="btn btn-primary btn-large">
-                            Записаться
-                            <span class="btn-arrow">→</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="slider-controls">
-        <button class="slider-prev" onclick="prevSlide()">‹</button>
-        <div class="slider-dots" id="sliderDots"></div>
-        <button class="slider-next" onclick="nextSlide()">›</button>
-    </div>
-</section>
+    </header>
 
-<!-- Categories Grid -->
-<section class="categories-section" id="catalog">
-    <div class="container">
-        <div class="section-header-center">
-            <span class="section-subtitle">Каталог продукции</span>
-            <h2 class="section-title">Выберите категорию</h2>
+    <!-- Accessibility Panel -->
+    <div class="accessibility-panel">
+        <div class="accessibility-toggle">♿</div>
+        <div class="accessibility-option">
+            <input type="checkbox" id="font-size-large">
+            <label for="font-size-large">Крупный шрифт</label>
         </div>
-        <div class="categories-grid">
-            <a href="#" class="category-card category-1" onclick="filterCategory('makeup'); return false;">
-                <div class="category-icon">💄</div>
-                <div class="category-info">
+        <div class="accessibility-option">
+            <input type="checkbox" id="high-contrast">
+            <label for="high-contrast">Высокий контраст</label>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1>Твоя красота <span class="highlight">начинается здесь</span></h1>
+                <p>Премиальная косметика и профессиональные услуги для создания твоего идеального образа. Открой для себя мир красоты GLOW.</p>
+                <div class="hero-buttons">
+                    <a href="catalog.html" class="btn btn-primary">В каталог</a>
+                    <a href="services.html" class="btn btn-outline">Наши услуги</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://placehold.co/600x700/1a1a25/ff0080?text=GLOW+Beauty" alt="GLOW Cosmetics">
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="categories">
+        <div class="container">
+            <h2 class="section-title">Категории</h2>
+            <p class="section-subtitle">Выбери свою категорию красоты</p>
+            <div class="categories-grid">
+                <a href="catalog.html?category=skincare" class="category-card">
+                    <div class="category-icon">🧴</div>
+                    <h3>Уход за кожей</h3>
+                    <p>Кремы, сыворотки, маски</p>
+                </a>
+                <a href="catalog.html?category=makeup" class="category-card">
+                    <div class="category-icon">💄</div>
                     <h3>Макияж</h3>
-                    <p>Помады, тени, тушь и всё для идеального образа</p>
-                    <span class="category-count">320 товаров</span>
-                </div>
-            </a>
-            <a href="#" class="category-card category-2" onclick="filterCategory('face'); return false;">
-                <div class="category-icon">🧴</div>
-                <div class="category-info">
-                    <h3>Уход за лицом</h3>
-                    <p>Кремы, сыворотки, маски для сияющей кожи</p>
-                    <span class="category-count">485 товаров</span>
-                </div>
-            </a>
-            <a href="#" class="category-card category-3" onclick="filterCategory('body'); return false;">
-                <div class="category-icon">🚿</div>
-                <div class="category-info">
-                    <h3>Уход за телом</h3>
-                    <p>Лосьоны, скрабы, масла для нежной кожи</p>
-                    <span class="category-count">210 товаров</span>
-                </div>
-            </a>
-            <a href="#" class="category-card category-4" onclick="filterCategory('hair'); return false;">
-                <div class="category-icon">💇</div>
-                <div class="category-info">
+                    <p>Помады, тени, тушь</p>
+                </a>
+                <a href="catalog.html?category=hair" class="category-card">
+                    <div class="category-icon">💇</div>
                     <h3>Уход за волосами</h3>
-                    <p>Шампуни, кондиционеры, маски для здоровья волос</p>
-                    <span class="category-count">195 товаров</span>
-                </div>
-            </a>
-            <a href="#" class="category-card category-5" onclick="filterCategory('natural'); return false;">
-                <div class="category-icon">🌿</div>
-                <div class="category-info">
-                    <h3>Натуральная косметика</h3>
-                    <p>Органические средства без химических добавок</p>
-                    <span class="category-count">150 товаров</span>
-                </div>
-            </a>
-            <a href="#" class="category-card category-6" onclick="filterCategory('spf'); return false;">
-                <div class="category-icon">☀️</div>
-                <div class="category-info">
-                    <h3>SPF защита</h3>
-                    <p>Защита от солнца для лица и тела</p>
-                    <span class="category-count">85 товаров</span>
-                </div>
-            </a>
+                    <p>Шампуни, маски, масла</p>
+                </a>
+                <a href="catalog.html?category=fragrance" class="category-card">
+                    <div class="category-icon">🌸</div>
+                    <h3>Парфюмерия</h3>
+                    <p>Духи, ароматы, масла</p>
+                </a>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Services Section -->
-<section class="services-section" id="services">
-    <div class="services-bg"></div>
-    <div class="container">
-        <div class="section-header-split">
-            <div class="section-header-left">
-                <span class="section-subtitle">Профессиональные услуги</span>
-                <h2 class="section-title">Beauty-сервис</h2>
-            </div>
-            <div class="section-header-right">
-                <p class="section-description">
-                    Наши специалисты помогут подобрать идеальные средства<br>
-                    и проведут индивидуальные консультации
-                </p>
-                <a href="#book" class="btn btn-primary" onclick="openModal('bookingModal'); return false;">Записаться</a>
-            </div>
-        </div>
-        <div class="services-list">
-            <div class="service-item">
-                <div class="service-number">01</div>
-                <div class="service-content">
-                    <div class="service-header">
-                        <h3 class="service-name">Консультация косметолога</h3>
-                        <span class="service-price">от 1 500 ₽</span>
-                    </div>
-                    <p class="service-description">Индивидуальный анализ типа кожи, подбор домашнего ухода, рекомендации по процедурам</p>
-                    <ul class="service-features">
-                        <li>⏱ 45 минут</li>
-                        <li>📋 План ухода в подарок</li>
-                        <li>🎁 Скидка 15% на продукцию</li>
-                    </ul>
-                </div>
-                <div class="service-action">
-                    <button class="btn btn-outline" onclick="openModal('bookingModal')">Записаться</button>
-                </div>
-            </div>
-            <div class="service-item">
-                <div class="service-number">02</div>
-                <div class="service-content">
-                    <div class="service-header">
-                        <h3 class="service-name">Визаж для особого случая</h3>
-                        <span class="service-price">от 3 000 ₽</span>
-                    </div>
-                    <p class="service-description">Создание идеального макияжа для свадьбы, фотосессии или важного мероприятия</p>
-                    <ul class="service-features">
-                        <li>⏱ 1.5 часа</li>
-                        <li>💄 Премиум косметика</li>
-                        <li>📸 Фото после макияжа</li>
-                    </ul>
-                </div>
-                <div class="service-action">
-                    <button class="btn btn-outline" onclick="openModal('bookingModal')">Записаться</button>
-                </div>
-            </div>
-            <div class="service-item">
-                <div class="service-number">03</div>
-                <div class="service-content">
-                    <div class="service-header">
-                        <h3 class="service-name">Beauty Box подписка</h3>
-                        <span class="service-price">от 990 ₽/мес</span>
-                    </div>
-                    <p class="service-description">Ежемесячная коробка с новинками косметики и полноразмерными продуктами</p>
-                    <ul class="service-features">
-                        <li>📦 5-7 продуктов</li>
-                        <li>🎯 Персональный подбор</li>
-                        <li>🚚 Бесплатная доставка</li>
-                    </ul>
-                </div>
-                <div class="service-action">
-                    <button class="btn btn-outline" onclick="subscribeToBeautyBox()">Подписаться</button>
-                </div>
-            </div>
-            <div class="service-item">
-                <div class="service-number">04</div>
-                <div class="service-content">
-                    <div class="service-header">
-                        <h3 class="service-name">Подарочные сертификаты</h3>
-                        <span class="service-price">от 1 000 ₽</span>
-                    </div>
-                    <p class="service-description">Идеальный подарок для близких — сертификат на любую сумму в нашем бутике</p>
-                    <ul class="service-features">
-                        <li>💳 Любая сумма</li>
-                        <li>🎨 Красивое оформление</li>
-                        <li>📧 Электронный или бумажный</li>
-                    </ul>
-                </div>
-                <div class="service-action">
-                    <button class="btn btn-outline" onclick="openModal('giftCertificateModal')">Купить</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Featured Products -->
-<section class="products-section">
-    <div class="container">
-        <div class="section-header-center">
-            <span class="section-subtitle">Лучший выбор</span>
+    <!-- Featured Products -->
+    <section class="products">
+        <div class="container">
             <h2 class="section-title">Популярные товары</h2>
-            <div class="section-tabs">
-                <button class="tab-btn active" data-tab="all" onclick="filterProducts('all')">Все</button>
-                <button class="tab-btn" data-tab="new" onclick="filterProducts('new')">Новинки</button>
-                <button class="tab-btn" data-tab="hit" onclick="filterProducts('hit')">Хиты</button>
-                <button class="tab-btn" data-tab="sale" onclick="filterProducts('sale')">Акции</button>
+            <p class="section-subtitle">Выбор наших клиентов</p>
+            <div class="products-grid">
+                <div class="product-card" data-category="skincare">
+                    <img src="https://placehold.co/300x300/1a1a25/ff0080?text=Serum" alt="Сыворотка" class="product-image">
+                    <div class="product-info">
+                        <span class="product-category">Уход за кожей</span>
+                        <h3 class="product-title">Увлажняющая сыворотка</h3>
+                        <p class="product-price">2 990 ₽</p>
+                        <div class="product-actions">
+                            <button class="btn btn-primary add-to-cart" 
+                                data-product-id="1" 
+                                data-product-name="Увлажняющая сыворотка" 
+                                data-product-price="2990">В корзину</button>
+                            <button class="btn btn-outline quick-view" data-product-id="1">👁</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" data-category="makeup">
+                    <img src="https://placehold.co/300x300/1a1a25/ff0080?text=Lipstick" alt="Помада" class="product-image">
+                    <div class="product-info">
+                        <span class="product-category">Макияж</span>
+                        <h3 class="product-title">Матовая помада</h3>
+                        <p class="product-price">1 890 ₽</p>
+                        <div class="product-actions">
+                            <button class="btn btn-primary add-to-cart" 
+                                data-product-id="2" 
+                                data-product-name="Матовая помада" 
+                                data-product-price="1890">В корзину</button>
+                            <button class="btn btn-outline quick-view" data-product-id="2">👁</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" data-category="hair">
+                    <img src="https://placehold.co/300x300/1a1a25/ff0080?text=Hair+Oil" alt="Масло для волос" class="product-image">
+                    <div class="product-info">
+                        <span class="product-category">Уход за волосами</span>
+                        <h3 class="product-title">Восстанавливающее масло</h3>
+                        <p class="product-price">3 490 ₽</p>
+                        <div class="product-actions">
+                            <button class="btn btn-primary add-to-cart" 
+                                data-product-id="3" 
+                                data-product-name="Восстанавливающее масло" 
+                                data-product-price="3490">В корзину</button>
+                            <button class="btn btn-outline quick-view" data-product-id="3">👁</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" data-category="fragrance">
+                    <img src="https://placehold.co/300x300/1a1a25/ff0080?text=Perfume" alt="Парфюм" class="product-image">
+                    <div class="product-info">
+                        <span class="product-category">Парфюмерия</span>
+                        <h3 class="product-title">Цветочный аромат</h3>
+                        <p class="product-price">5 990 ₽</p>
+                        <div class="product-actions">
+                            <button class="btn btn-primary add-to-cart" 
+                                data-product-id="4" 
+                                data-product-name="Цветочный аромат" 
+                                data-product-price="5990">В корзину</button>
+                            <button class="btn btn-outline quick-view" data-product-id="4">👁</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="catalog.html" class="btn btn-primary">Смотреть все товары</a>
             </div>
         </div>
-        <div class="products-grid" id="productsGrid">
-            <!-- Products will be loaded dynamically -->
+    </section>
+
+    <!-- Services Preview -->
+    <section class="services">
+        <div class="container">
+            <h2 class="section-title">Наши услуги</h2>
+            <p class="section-subtitle">Профессиональный подход к вашей красоте</p>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">💅</div>
+                    <h3>Визажист</h3>
+                    <p>Профессиональный макияж для любого случая: дневной, вечерний, свадебный.</p>
+                    <p class="service-price">от 3 000 ₽</p>
+                    <a href="services.html" class="btn btn-outline">Подробнее</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">✨</div>
+                    <h3>Консультации</h3>
+                    <p>Индивидуальный подбор косметики и составление программы ухода.</p>
+                    <p class="service-price">от 1 500 ₽</p>
+                    <a href="services.html" class="btn btn-outline">Подробнее</a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🎁</div>
+                    <h3>Beauty Box</h3>
+                    <p>Ежемесячная подписка на набор премиальной косметики.</p>
+                    <p class="service-price">от 2 990 ₽/мес</p>
+                    <a href="services.html" class="btn btn-outline">Подробнее</a>
+                </div>
+            </div>
         </div>
-        <div class="section-footer">
-            <a href="#catalog" class="btn btn-secondary">Смотреть весь каталог →</a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-logo">GLOW</div>
+                    <p class="footer-desc">Твой проводник в мир премиальной косметики и красоты. Мы создаём продукты, которые подчёркивают твою индивидуальность.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">📱</a>
+                        <a href="#" class="social-link">📷</a>
+                        <a href="#" class="social-link">🎬</a>
+                        <a href="#" class="social-link">💬</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer-title">Категории</h4>
+                    <ul class="footer-links">
+                        <li><a href="catalog.html?category=skincare">Уход за кожей</a></li>
+                        <li><a href="catalog.html?category=makeup">Макияж</a></li>
+                        <li><a href="catalog.html?category=hair">Уход за волосами</a></li>
+                        <li><a href="catalog.html?category=fragrance">Парфюмерия</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">Компания</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">О нас</a></li>
+                        <li><a href="services.html">Услуги</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                        <li><a href="#">Блог</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">Контакты</h4>
+                    <ul class="footer-links">
+                        <li>📍 Москва, ул. Красоты, 1</li>
+                        <li>📞 +7 (999) 000-00-00</li>
+                        <li>✉️ hello@glowcosmetics.ru</li>
+                        <li>⏰ Ежедневно 10:00 - 22:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 GLOW Cosmetics. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Корзина</h3>
+            <button class="modal-close" onclick="document.querySelector('.cart-sidebar').classList.remove('active'); document.querySelector('.overlay').classList.remove('active');">×</button>
+        </div>
+        <div class="cart-items">
+            <!-- Items will be rendered here -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Итого:</span>
+                <span class="cart-total-value">0 ₽</span>
+            </div>
+            <button class="btn btn-primary" id="checkout-btn" style="width: 100%;">Оформить заказ</button>
         </div>
     </div>
-</section>
 
-<!-- About Section -->
-<section class="about-section" id="about">
-    <div class="container">
-        <div class="about-grid">
-            <div class="about-content">
-                <span class="section-subtitle">О бренде GLOW</span>
-                <h2 class="section-title">Мы верим в естественную красоту</h2>
-                <p class="about-text">
-                    GLOW — это больше, чем просто магазин косметики. Это пространство, где встречаются инновации и природа, где каждый продукт создан с заботой о вашей коже и окружающей среде.
-                </p>
-                <p class="about-text">
-                    Мы тщательно отбираем бренды, которые разделяют наши ценности: честность, прозрачность состава и эффективность. Каждый товар в нашем каталоге прошел строгий отбор экспертов.
-                </p>
-                <div class="about-stats">
-                    <div class="about-stat">
-                        <span class="stat-number">5+</span>
-                        <span class="stat-label">лет на рынке</span>
-                    </div>
-                    <div class="about-stat">
-                        <span class="stat-number">200+</span>
-                        <span class="stat-label">брендов</span>
-                    </div>
-                    <div class="about-stat">
-                        <span class="stat-number">50K+</span>
-                        <span class="stat-label">клиентов</span>
-                    </div>
-                    <div class="about-stat">
-                        <span class="stat-number">4.9</span>
-                        <span class="stat-label">рейтинг</span>
-                    </div>
-                </div>
+    <!-- Login Modal -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Вход в аккаунт</h3>
+                <button class="modal-close">×</button>
             </div>
-            <div class="about-visual">
-                <div class="about-image-placeholder">
-                    <span class="placeholder-emoji">🌟</span>
-                    <span class="placeholder-label">Natural Beauty</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Blog Section -->
-<section class="blog-section" id="blog">
-    <div class="container">
-        <div class="section-header-split">
-            <div class="section-header-left">
-                <span class="section-subtitle">Наш блог</span>
-                <h2 class="section-title">Советы экспертов</h2>
-            </div>
-            <div class="section-header-right">
-                <a href="#blog-all" class="btn btn-secondary">Все статьи →</a>
-            </div>
-        </div>
-        <div class="blog-grid">
-            <article class="blog-card">
-                <div class="blog-image">
-                    <span class="blog-placeholder">📝</span>
-                </div>
-                <div class="blog-content">
-                    <div class="blog-meta">
-                        <span class="blog-category">Уход</span>
-                        <span class="blog-date">15 января 2025</span>
-                    </div>
-                    <h3 class="blog-title">Как правильно подобрать сыворотку для вашего типа кожи</h3>
-                    <p class="blog-excerpt">Разбираемся в составах и учимся выбирать активные ингредиенты...</p>
-                    <a href="#" class="blog-link">Читать далее →</a>
-                </div>
-            </article>
-            <article class="blog-card">
-                <div class="blog-image">
-                    <span class="blog-placeholder">💄</span>
-                </div>
-                <div class="blog-content">
-                    <div class="blog-meta">
-                        <span class="blog-category">Макияж</span>
-                        <span class="blog-date">12 января 2025</span>
-                    </div>
-                    <h3 class="blog-title">Тренды макияжа весна-лето 2025</h3>
-                    <p class="blog-excerpt">От натуральных оттенков до смелых экспериментов — что будет в моде...</p>
-                    <a href="#" class="blog-link">Читать далее →</a>
-                </div>
-            </article>
-            <article class="blog-card">
-                <div class="blog-image">
-                    <span class="blog-placeholder">🌿</span>
-                </div>
-                <div class="blog-content">
-                    <div class="blog-meta">
-                        <span class="blog-category">Экология</span>
-                        <span class="blog-date">8 января 2025</span>
-                    </div>
-                    <h3 class="blog-title">Zero waste в косметике: с чего начать</h3>
-                    <p class="blog-excerpt">Простые шаги к осознанному потреблению и заботе о планете...</p>
-                    <a href="#" class="blog-link">Читать далее →</a>
-                </div>
-            </article>
-        </div>
-    </div>
-</section>
-
-<!-- Contacts Section -->
-<section class="contacts-section" id="contacts">
-    <div class="container">
-        <div class="contacts-grid">
-            <div class="contacts-info">
-                <span class="section-subtitle">Контакты</span>
-                <h2 class="section-title">Свяжитесь с нами</h2>
-                <div class="contact-items">
-                    <div class="contact-item">
-                        <span class="contact-icon">📍</span>
-                        <div>
-                            <strong>Адрес магазина</strong>
-                            <p>Москва, ул. Красоты, д. 15</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <span class="contact-icon">📞</span>
-                        <div>
-                            <strong>Телефон</strong>
-                            <p><a href="tel:+78001234567">8 (800) 123-45-67</a></p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <span class="contact-icon">✉️</span>
-                        <div>
-                            <strong>Email</strong>
-                            <p><a href="mailto:hello@glow.ru">hello@glow.ru</a></p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <span class="contact-icon">🕐</span>
-                        <div>
-                            <strong>Режим работы</strong>
-                            <p>Ежедневно с 10:00 до 22:00</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="social-links">
-                    <a href="#" class="social-link">Telegram</a>
-                    <a href="#" class="social-link">VK</a>
-                    <a href="#" class="social-link">WhatsApp</a>
-                    <a href="#" class="social-link">YouTube</a>
-                </div>
-            </div>
-            <div class="contacts-form-wrapper">
-                <form class="contacts-form" onsubmit="handleContactForm(event)">
-                    <h3>Напишите нам</h3>
+            <div class="modal-body">
+                <form id="login-form">
                     <div class="form-group">
-                        <input type="text" name="name" placeholder="Ваше имя" required>
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" required placeholder="your@email.com">
                     </div>
                     <div class="form-group">
-                        <input type="email" name="email" placeholder="Email" required>
+                        <label for="login-password">Пароль</label>
+                        <input type="password" id="login-password" required placeholder="••••••••">
                     </div>
-                    <div class="form-group">
-                        <textarea name="message" placeholder="Ваше сообщение" rows="4" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-full">Отправить</button>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Войти</button>
+                    <p style="text-align: center; margin-top: 1rem; color: var(--text-secondary);">
+                        Нет аккаунта? <a href="profile.html" style="color: var(--primary);">Зарегистрироваться</a>
+                    </p>
                 </form>
             </div>
         </div>
     </div>
-</section>
 
-</main>
-
-<!-- Footer -->
-<footer class="main-footer">
-    <div class="container">
-        <div class="footer-grid">
-            <div class="footer-column">
-                <a href="/" class="footer-logo">
-                    <div class="logo-symbol">G</div>
-                    <span class="logo-main">GLOW</span>
-                </a>
-                <p class="footer-description">
-                    Премиальная косметика и профессиональные beauty-услуги. Ваша красота — наша миссия.
-                </p>
+    <!-- Product Modal -->
+    <div class="modal" id="product-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Быстрый просмотр</h3>
+                <button class="modal-close">×</button>
             </div>
-            <div class="footer-column">
-                <h4>Каталог</h4>
-                <ul>
-                    <li><a href="#catalog?cat=makeup">Макияж</a></li>
-                    <li><a href="#catalog?cat=face">Уход за лицом</a></li>
-                    <li><a href="#catalog?cat=body">Уход за телом</a></li>
-                    <li><a href="#catalog?cat=hair">Уход за волосами</a></li>
-                    <li><a href="#catalog?cat=natural">Натуральная косметика</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h4>Услуги</h4>
-                <ul>
-                    <li><a href="#services" onclick="openModal('bookingModal')">Консультация косметолога</a></li>
-                    <li><a href="#services" onclick="openModal('bookingModal')">Визаж</a></li>
-                    <li><a href="#" onclick="subscribeToBeautyBox()">Beauty Box</a></li>
-                    <li><a href="#services" onclick="openModal('giftCertificateModal')">Подарочные сертификаты</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h4>Компания</h4>
-                <ul>
-                    <li><a href="#about">О нас</a></li>
-                    <li><a href="#blog">Блог</a></li>
-                    <li><a href="#contacts">Контакты</a></li>
-                    <li><a href="#">Вакансии</a></li>
-                    <li><a href="#">Партнерам</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h4>Поддержка</h4>
-                <ul>
-                    <li><a href="#">Доставка и оплата</a></li>
-                    <li><a href="#">Возврат товара</a></li>
-                    <li><a href="#">Частые вопросы</a></li>
-                    <li><a href="#">Политика конфиденциальности</a></li>
-                    <li><a href="#">Публичная оферта</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 GLOW. Все права защищены.</p>
-            <div class="footer-payment">
-                <span class="payment-method">VISA</span>
-                <span class="payment-method">MasterCard</span>
-                <span class="payment-method">МИР</span>
-                <span class="payment-method">SBP</span>
+            <div class="modal-body">
+                <p style="text-align: center; color: var(--text-secondary);">Детали товара загружаются...</p>
             </div>
         </div>
     </div>
-</footer>
 
-<!-- MODALS -->
+    <!-- Overlay -->
+    <div class="overlay"></div>
 
-<!-- Product Modal -->
-<div class="modal" id="productModal">
-    <div class="modal-overlay" onclick="closeModal('productModal')"></div>
-    <div class="modal-content modal-product">
-        <button class="modal-close" onclick="closeModal('productModal')">✕</button>
-        <div class="modal-product-grid">
-            <div class="modal-product-image">
-                <span class="image-placeholder" id="modalProductImage">🧴</span>
-            </div>
-            <div class="modal-product-info">
-                <div class="modal-product-brand" id="modalProductBrand">BRAND</div>
-                <h2 class="modal-product-title" id="modalProductTitle">Название товара</h2>
-                <div class="modal-product-rating" id="modalProductRating">
-                    <span class="stars">★★★★★</span>
-                    <span class="rating-count">(0)</span>
-                </div>
-                <div class="modal-product-price" id="modalProductPrice">0 ₽</div>
-                <p class="modal-product-description" id="modalProductDescription">Описание товара</p>
-                <div class="modal-product-options">
-                    <label>Объем:</label>
-                    <div class="size-options">
-                        <button class="size-btn active">30 мл</button>
-                        <button class="size-btn">50 мл</button>
-                        <button class="size-btn">100 мл</button>
-                    </div>
-                </div>
-                <div class="modal-product-actions">
-                    <button class="btn btn-primary btn-large btn-full" onclick="addToCartFromModal()">
-                        Добавить в корзину
-                    </button>
-                    <button class="btn btn-outline btn-large" onclick="addToFavoritesFromModal()">
-                        ♡ В избранное
-                    </button>
-                </div>
-                <div class="modal-product-meta">
-                    <div class="meta-item">
-                        <span class="meta-label">Артикул:</span>
-                        <span class="meta-value" id="modalProductSku">000000</span>
-                    </div>
-                    <div class="meta-item">
-                        <span class="meta-label">Наличие:</span>
-                        <span class="meta-value in-stock">✓ В наличии</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Cart Modal -->
-<div class="modal" id="cartModal">
-    <div class="modal-overlay" onclick="closeModal('cartModal')"></div>
-    <div class="modal-content modal-cart">
-        <button class="modal-close" onclick="closeModal('cartModal')">✕</button>
-        <h2 class="modal-title">Корзина</h2>
-        <div class="cart-content" id="cartContent">
-            <div class="cart-empty" id="cartEmpty">
-                <span class="empty-icon">🛍</span>
-                <p>Ваша корзина пуста</p>
-                <a href="#catalog" class="btn btn-primary" onclick="closeModal('cartModal')">Перейти в каталог</a>
-            </div>
-            <div class="cart-filled" id="cartFilled" style="display: none;">
-                <div class="cart-items" id="cartItems"></div>
-                <div class="cart-summary">
-                    <div class="summary-row">
-                        <span>Товары</span>
-                        <span id="cartSubtotal">0 ₽</span>
-                    </div>
-                    <div class="summary-row">
-                        <span>Скидка</span>
-                        <span id="cartDiscount">0 ₽</span>
-                    </div>
-                    <div class="summary-row">
-                        <span>Доставка</span>
-                        <span id="cartDelivery">бесплатно</span>
-                    </div>
-                    <div class="summary-total">
-                        <span>Итого</span>
-                        <span id="cartTotal">0 ₽</span>
-                    </div>
-                    <button class="btn btn-primary btn-full btn-large" onclick="checkout()">Оформить заказ</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Favorites Modal -->
-<div class="modal" id="favoritesModal">
-    <div class="modal-overlay" onclick="closeModal('favoritesModal')"></div>
-    <div class="modal-content modal-favorites">
-        <button class="modal-close" onclick="closeModal('favoritesModal')">✕</button>
-        <h2 class="modal-title">Избранное</h2>
-        <div class="favorites-content" id="favoritesContent">
-            <div class="favorites-empty" id="favoritesEmpty">
-                <span class="empty-icon">♡</span>
-                <p>Список избранного пуст</p>
-                <a href="#catalog" class="btn btn-primary" onclick="closeModal('favoritesModal')">Перейти в каталог</a>
-            </div>
-            <div class="favorites-filled" id="favoritesFilled" style="display: none;">
-                <div class="favorites-grid" id="favoritesGrid"></div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Profile Modal -->
-<div class="modal" id="profileModal">
-    <div class="modal-overlay" onclick="closeModal('profileModal')"></div>
-    <div class="modal-content modal-profile">
-        <button class="modal-close" onclick="closeModal('profileModal')">✕</button>
-        
-        <!-- Login Form -->
-        <div id="profileLogin">
-            <h2 class="modal-title">Вход в личный кабинет</h2>
-            <form class="profile-form" onsubmit="handleLogin(event)">
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" name="email" placeholder="your@email.com" required>
-                </div>
-                <div class="form-group">
-                    <label>Пароль</label>
-                    <input type="password" name="password" placeholder="••••••••" required>
-                </div>
-                <div class="form-options">
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="remember">
-                        <span>Запомнить меня</span>
-                    </label>
-                    <a href="#" class="forgot-link">Забыли пароль?</a>
-                </div>
-                <button type="submit" class="btn btn-primary btn-full btn-large">Войти</button>
-            </form>
-            <div class="profile-divider">
-                <span>или</span>
-            </div>
-            <div class="social-login">
-                <button class="social-btn google">Google</button>
-                <button class="social-btn vk">VK ID</button>
-            </div>
-            <p class="profile-register">
-                Нет аккаунта? <a href="#" onclick="showRegisterForm()">Зарегистрироваться</a>
-            </p>
-        </div>
-        
-        <!-- Register Form -->
-        <div id="profileRegister" style="display: none;">
-            <h2 class="modal-title">Регистрация</h2>
-            <form class="profile-form" onsubmit="handleRegister(event)">
-                <div class="form-group">
-                    <label>Имя</label>
-                    <input type="text" name="name" placeholder="Ваше имя" required>
-                </div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="email" name="email" placeholder="your@email.com" required>
-                </div>
-                <div class="form-group">
-                    <label>Пароль</label>
-                    <input type="password" name="password" placeholder="••••••••" required minlength="6">
-                </div>
-                <div class="form-group">
-                    <label>Подтвердите пароль</label>
-                    <input type="password" name="confirmPassword" placeholder="••••••••" required>
-                </div>
-                <label class="checkbox-label">
-                    <input type="checkbox" name="agreement" required>
-                    <span>Согласен с <a href="#">условиями обработки данных</a></span>
-                </label>
-                <button type="submit" class="btn btn-primary btn-full btn-large">Зарегистрироваться</button>
-            </form>
-            <p class="profile-register">
-                Уже есть аккаунт? <a href="#" onclick="showLoginForm()">Войти</a>
-            </p>
-        </div>
-        
-        <!-- Logged In View -->
-        <div id="profileLogged" style="display: none;">
-            <div class="profile-header">
-                <div class="profile-avatar" id="profileAvatar">👤</div>
-                <div class="profile-welcome">
-                    <h3 id="profileName">Имя пользователя</h3>
-                    <p id="profileEmail">email@example.com</p>
-                </div>
-            </div>
-            <nav class="profile-nav">
-                <a href="#" class="profile-nav-item active">
-                    <span class="nav-item-icon">📦</span>
-                    Мои заказы
-                </a>
-                <a href="#" class="profile-nav-item">
-                    <span class="nav-item-icon">♡</span>
-                    Избранное
-                </a>
-                <a href="#" class="profile-nav-item">
-                    <span class="nav-item-icon">🎁</span>
-                    Бонусы
-                </a>
-                <a href="#" class="profile-nav-item">
-                    <span class="nav-item-icon">⚙️</span>
-                    Настройки
-                </a>
-            </nav>
-            <div class="profile-orders-preview" id="profileOrdersPreview">
-                <h4>Последние заказы</h4>
-                <div class="orders-list" id="ordersList">
-                    <p class="no-orders">У вас пока нет заказов</p>
-                </div>
-            </div>
-            <button class="btn btn-outline btn-full" onclick="logout()">Выйти</button>
-        </div>
-    </div>
-</div>
-
-<!-- Booking Modal -->
-<div class="modal" id="bookingModal">
-    <div class="modal-overlay" onclick="closeModal('bookingModal')"></div>
-    <div class="modal-content modal-booking">
-        <button class="modal-close" onclick="closeModal('bookingModal')">✕</button>
-        <h2 class="modal-title">Запись на услугу</h2>
-        <form class="booking-form" onsubmit="handleBooking(event)">
-            <div class="form-group">
-                <label>Выберите услугу</label>
-                <select name="service" required>
-                    <option value="">-- Выберите услугу --</option>
-                    <option value="consultation">Консультация косметолога (1 500 ₽)</option>
-                    <option value="makeup">Визаж для особого случая (3 000 ₽)</option>
-                    <option value="masterclass">Мастер-класс по макияжу (2 500 ₽)</option>
-                    <option value="skinanalysis">Диагностика кожи (бесплатно)</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Дата</label>
-                <input type="date" name="date" required>
-            </div>
-            <div class="form-group">
-                <label>Время</label>
-                <select name="time" required>
-                    <option value="">-- Выберите время --</option>
-                    <option value="10:00">10:00</option>
-                    <option value="11:00">11:00</option>
-                    <option value="12:00">12:00</option>
-                    <option value="13:00">13:00</option>
-                    <option value="14:00">14:00</option>
-                    <option value="15:00">15:00</option>
-                    <option value="16:00">16:00</option>
-                    <option value="17:00">17:00</option>
-                    <option value="18:00">18:00</option>
-                    <option value="19:00">19:00</option>
-                    <option value="20:00">20:00</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Ваше имя</label>
-                <input type="text" name="name" placeholder="Иван Иванов" required>
-            </div>
-            <div class="form-group">
-                <label>Телефон</label>
-                <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required>
-            </div>
-            <div class="form-group">
-                <label>Комментарий (необязательно)</label>
-                <textarea name="comment" placeholder="Пожелания к услуге" rows="3"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary btn-full btn-large">Записаться</button>
-        </form>
-    </div>
-</div>
-
-<!-- Gift Certificate Modal -->
-<div class="modal" id="giftCertificateModal">
-    <div class="modal-overlay" onclick="closeModal('giftCertificateModal')"></div>
-    <div class="modal-content modal-gift">
-        <button class="modal-close" onclick="closeModal('giftCertificateModal')">✕</button>
-        <h2 class="modal-title">Подарочный сертификат</h2>
-        <div class="gift-preview">
-            <div class="gift-card-preview">
-                <span class="gift-emoji">🎁</span>
-                <span class="gift-amount" id="previewAmount">3 000 ₽</span>
-                <span class="gift-brand">GLOW</span>
-            </div>
-        </div>
-        <form class="gift-form" onsubmit="handleGiftCertificate(event)">
-            <div class="form-group">
-                <label>Номинал</label>
-                <div class="amount-options">
-                    <button type="button" class="amount-btn" onclick="setGiftAmount(1000)">1 000 ₽</button>
-                    <button type="button" class="amount-btn active" onclick="setGiftAmount(3000)">3 000 ₽</button>
-                    <button type="button" class="amount-btn" onclick="setGiftAmount(5000)">5 000 ₽</button>
-                    <button type="button" class="amount-btn" onclick="setGiftAmount(10000)">10 000 ₽</button>
-                </div>
-                <input type="number" name="customAmount" placeholder="Другая сумма" min="500" max="50000">
-            </div>
-            <div class="form-group">
-                <label>Тип сертификата</label>
-                <div class="type-options">
-                    <label class="radio-label">
-                        <input type="radio" name="certType" value="electronic" checked>
-                        <span>📧 Электронный</span>
-                    </label>
-                    <label class="radio-label">
-                        <input type="radio" name="certType" value="paper">
-                        <span>📄 Бумажный</span>
-                    </label>
-                </div>
-            </div>
-            <div class="form-group">
-                <label>Получатель</label>
-                <input type="text" name="recipientName" placeholder="Имя получателя" required>
-            </div>
-            <div class="form-group">
-                <label>Email получателя</label>
-                <input type="email" name="recipientEmail" placeholder="email@example.com" required>
-            </div>
-            <div class="form-group">
-                <label>Поздравление (необязательно)</label>
-                <textarea name="message" placeholder="Ваше поздравление" rows="3"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary btn-full btn-large">Купить сертификат</button>
-        </form>
-    </div>
-</div>
-
-<!-- Checkout Modal -->
-<div class="modal" id="checkoutModal">
-    <div class="modal-overlay" onclick="closeModal('checkoutModal')"></div>
-    <div class="modal-content modal-checkout">
-        <button class="modal-close" onclick="closeModal('checkoutModal')">✕</button>
-        <h2 class="modal-title">Оформление заказа</h2>
-        <form class="checkout-form" onsubmit="handleCheckout(event)">
-            <div class="checkout-section">
-                <h3>Контактные данные</h3>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Имя *</label>
-                        <input type="text" name="firstName" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Фамилия *</label>
-                        <input type="text" name="lastName" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Email *</label>
-                        <input type="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Телефон *</label>
-                        <input type="tel" name="phone" placeholder="+7 (___) ___-__-__" required>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="checkout-section">
-                <h3>Адрес доставки</h3>
-                <div class="form-group">
-                    <label>Город *</label>
-                    <input type="text" name="city" required>
-                </div>
-                <div class="form-group">
-                    <label>Улица, дом, квартира *</label>
-                    <input type="text" name="address" required>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Индекс *</label>
-                        <input type="text" name="zip" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Комментарий к адресу</label>
-                        <input type="text" name="addressComment" placeholder="Подъезд, этаж...">
-                    </div>
-                </div>
-            </div>
-            
-            <div class="checkout-section">
-                <h3>Способ доставки</h3>
-                <div class="delivery-options">
-                    <label class="delivery-option">
-                        <input type="radio" name="delivery" value="courier" checked onchange="updateDeliveryCost(0)">
-                        <div class="option-card">
-                            <span class="option-icon">🚚</span>
-                            <span>Курьером</span>
-                            <span class="option-price">бесплатно</span>
-                        </div>
-                    </label>
-                    <label class="delivery-option">
-                        <input type="radio" name="delivery" value="pickup" onchange="updateDeliveryCost(0)">
-                        <div class="option-card">
-                            <span class="option-icon">📍</span>
-                            <span>Самовывоз</span>
-                            <span class="option-price">бесплатно</span>
-                        </div>
-                    </label>
-                    <label class="delivery-option">
-                        <input type="radio" name="delivery" value="post" onchange="updateDeliveryCost(350)">
-                        <div class="option-card">
-                            <span class="option-icon">📮</span>
-                            <span>Почта России</span>
-                            <span class="option-price">350 ₽</span>
-                        </div>
-                    </label>
-                </div>
-            </div>
-            
-            <div class="checkout-section">
-                <h3>Способ оплаты</h3>
-                <div class="payment-options">
-                    <label class="payment-option">
-                        <input type="radio" name="payment" value="card" checked>
-                        <div class="option-card">
-                            <span class="option-icon">💳</span>
-                            <span>Картой онлайн</span>
-                        </div>
-                    </label>
-                    <label class="payment-option">
-                        <input type="radio" name="payment" value="sbp">
-                        <div class="option-card">
-                            <span class="option-icon">📱</span>
-                            <span>SBP</span>
-                        </div>
-                    </label>
-                    <label class="payment-option">
-                        <input type="radio" name="payment" value="cash">
-                        <div class="option-card">
-                            <span class="option-icon">💵</span>
-                            <span>При получении</span>
-                        </div>
-                    </label>
-                </div>
-            </div>
-            
-            <div class="checkout-summary">
-                <div class="summary-row">
-                    <span>Товары (<span id="checkoutItemsCount">0</span>)</span>
-                    <span id="checkoutSubtotal">0 ₽</span>
-                </div>
-                <div class="summary-row">
-                    <span>Доставка</span>
-                    <span id="checkoutDelivery">бесплатно</span>
-                </div>
-                <div class="summary-total">
-                    <span>Итого к оплате</span>
-                    <span id="checkoutTotal">0 ₽</span>
-                </div>
-            </div>
-            
-            <label class="checkbox-label">
-                <input type="checkbox" required>
-                <span>Согласен с <a href="#">условиями обработки персональных данных</a></span>
-            </label>
-            
-            <button type="submit" class="btn btn-primary btn-full btn-large">Подтвердить заказ</button>
-        </form>
-    </div>
-</div>
-
-<!-- Notification Toast -->
-<div class="toast" id="toast">
-    <span class="toast-icon" id="toastIcon">✓</span>
-    <span class="toast-message" id="toastMessage">Сообщение</span>
-</div>
-
-<script src="assets/js/main.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
