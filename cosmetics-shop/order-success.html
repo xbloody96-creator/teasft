@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLOW Cosmetics - Заказ оформлен!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;600;700&family=DM+Sans:opsz,wght@9..40,300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .success-page { padding-top: 100px; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+        .success-container { max-width: 600px; text-align: center; padding: 40px; }
+        .success-icon { width: 120px; height: 120px; background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 30px; animation: scaleIn 0.6s ease; }
+        .success-icon svg { width: 60px; height: 60px; color: white; }
+        .success-title { font-family: 'Unbounded', sans-serif; font-size: 2rem; margin-bottom: 15px; color: var(--text-primary); }
+        .success-message { color: var(--text-secondary); line-height: 1.7; margin-bottom: 30px; }
+        .order-details { background: var(--card-bg); border-radius: 20px; padding: 30px; margin-bottom: 30px; border: 1px solid var(--border-color); }
+        .order-number { font-size: 1.5rem; font-weight: 700; color: var(--accent-pink); margin-bottom: 10px; }
+        .order-info { color: var(--text-secondary); margin-bottom: 20px; }
+        .btn-group { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+        
+        @keyframes scaleIn {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .confetti { position: fixed; width: 10px; height: 10px; background: var(--accent-pink); animation: fall linear forwards; }
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(720deg); }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <a href="index.html" class="logo">GLOW</a>
+            <nav class="nav-menu">
+                <a href="index.html">Главная</a>
+                <a href="catalog.html">Каталог</a>
+                <a href="services.html">Услуги</a>
+                <a href="blog.html">Блог</a>
+                <a href="about.html">О нас</a>
+                <a href="contacts.html">Контакты</a>
+            </nav>
+            <div class="header-actions">
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+                <button class="accessibility-toggle" id="accessibilityToggle">👁️</button>
+                <a href="wishlist.html" class="header-icon">❤️</a>
+                <a href="cart.html" class="header-icon cart-icon">🛒<span class="cart-count">0</span></a>
+                <a href="profile.html" class="header-icon">👤</a>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="success-page">
+        <div class="success-container">
+            <div class="success-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                </svg>
+            </div>
+            
+            <h1 class="success-title">Заказ успешно оформлен!</h1>
+            <p class="success-message">
+                Спасибо за покупку! Мы уже начали обрабатывать ваш заказ. 
+                В ближайшее время вы получите подтверждение на email.
+            </p>
+            
+            <div class="order-details">
+                <div class="order-number" id="orderNumber">№ 000000</div>
+                <p class="order-info" id="orderDate">Дата заказа: --.--.----</p>
+                <p class="order-info" id="orderTotal">Сумма: 0 ₽</p>
+            </div>
+            
+            <div class="btn-group">
+                <a href="profile.html" class="btn">В личный кабинет</a>
+                <a href="catalog.html" class="btn btn-outline">Продолжить покупки</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>GLOW</h3>
+                    <p>Премиум косметика для вашей красоты</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Навигация</h4>
+                    <a href="catalog.html">Каталог</a>
+                    <a href="services.html">Услуги</a>
+                    <a href="blog.html">Блог</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Поддержка</h4>
+                    <a href="faq.html">FAQ</a>
+                    <a href="contacts.html">Контакты</a>
+                    <a href="policy.html">Политика конфиденциальности</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Мы в соцсетях</h4>
+                    <div class="social-links">
+                        <a href="#">Instagram</a>
+                        <a href="#">Telegram</a>
+                        <a href="#">VK</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 GLOW Cosmetics. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Получаем данные заказа
+        const urlParams = new URLSearchParams(window.location.search);
+        const orderId = urlParams.get('orderId');
+        
+        if (orderId) {
+            const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+            const order = orders.find(o => o.id == orderId);
+            
+            if (order) {
+                document.getElementById('orderNumber').textContent = `№ ${String(order.id).slice(-6)}`;
+                const date = new Date(order.date);
+                document.getElementById('orderDate').textContent = `Дата заказа: ${date.toLocaleDateString('ru-RU')} ${date.toLocaleTimeString('ru-RU', {hour: '2-digit', minute:'2-digit'})}`;
+                document.getElementById('orderTotal').textContent = `Сумма: ${order.total}`;
+            }
+        }
+        
+        // Конфетти
+        function createConfetti() {
+            const colors = ['#FF6B9D', '#C445F5', '#64FF64', '#FFD700'];
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 4000);
+                }, i * 50);
+            }
+        }
+        
+        createConfetti();
+        updateCartCount();
+    </script>
+</body>
+</html>

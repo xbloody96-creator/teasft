@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLOW Cosmetics - Умный подбор ухода</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;600;700&family=DM+Sans:opsz,wght@9..40,300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .quiz-page { padding-top: 100px; min-height: 100vh; }
+        .quiz-container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+        .quiz-header { text-align: center; margin-bottom: 40px; }
+        .quiz-title { font-family: 'Unbounded', sans-serif; font-size: 2.5rem; margin-bottom: 15px; color: var(--text-primary); }
+        .quiz-progress { width: 100%; height: 8px; background: var(--card-bg); border-radius: 10px; overflow: hidden; margin-bottom: 30px; }
+        .progress-bar { height: 100%; background: linear-gradient(90deg, var(--accent-pink), var(--accent-purple)); transition: width 0.5s ease; width: 0%; }
+        
+        .quiz-step { display: none; animation: fadeIn 0.5s ease; }
+        .quiz-step.active { display: block; }
+        .step-title { font-size: 1.5rem; margin-bottom: 25px; color: var(--text-primary); text-align: center; }
+        
+        .options-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .option-card { padding: 25px; background: var(--card-bg); border: 2px solid var(--border-color); border-radius: 20px; cursor: pointer; text-align: center; transition: all 0.3s ease; }
+        .option-card:hover { border-color: var(--accent-pink); transform: translateY(-5px); }
+        .option-card.selected { border-color: var(--accent-pink); background: rgba(255, 107, 157, 0.05); }
+        .option-icon { font-size: 3rem; margin-bottom: 15px; }
+        .option-text { font-weight: 600; color: var(--text-primary); }
+        
+        .btn-group { display: flex; gap: 15px; justify-content: center; margin-top: 30px; }
+        .btn-next { padding: 15px 40px; font-size: 1.1rem; }
+        .btn-prev { padding: 15px 40px; font-size: 1.1rem; }
+        
+        .results-container { display: none; text-align: center; }
+        .results-title { font-family: 'Unbounded', sans-serif; font-size: 2rem; margin-bottom: 20px; color: var(--text-primary); }
+        .results-description { color: var(--text-secondary); line-height: 1.7; margin-bottom: 30px; }
+        .recommended-products { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 40px; }
+        .product-card { background: var(--card-bg); border-radius: 20px; padding: 20px; border: 1px solid var(--border-color); transition: all 0.3s ease; }
+        .product-card:hover { transform: translateY(-5px); border-color: var(--accent-pink); }
+        .product-image { width: 100%; aspect-ratio: 1; border-radius: 15px; overflow: hidden; margin-bottom: 15px; background: var(--bg-secondary); }
+        .product-image img { width: 100%; height: 100%; object-fit: cover; }
+        .product-name { font-weight: 600; color: var(--text-primary); margin-bottom: 8px; }
+        .product-price { color: var(--accent-pink); font-weight: 700; font-size: 1.2rem; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <a href="index.html" class="logo">GLOW</a>
+            <nav class="nav-menu">
+                <a href="index.html">Главная</a>
+                <a href="catalog.html">Каталог</a>
+                <a href="services.html">Услуги</a>
+                <a href="blog.html">Блог</a>
+                <a href="about.html">О нас</a>
+                <a href="contacts.html">Контакты</a>
+            </nav>
+            <div class="header-actions">
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+                <button class="accessibility-toggle" id="accessibilityToggle">👁️</button>
+                <a href="wishlist.html" class="header-icon">❤️</a>
+                <a href="cart.html" class="header-icon cart-icon">🛒<span class="cart-count">0</span></a>
+                <a href="profile.html" class="header-icon">👤</a>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="quiz-page">
+        <div class="quiz-container">
+            <div class="quiz-header">
+                <h1 class="quiz-title">Подбор идеального ухода</h1>
+                <p style="color: var(--text-secondary);">Ответьте на несколько вопросов и получите персонализированные рекомендации</p>
+            </div>
+            
+            <div class="quiz-progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            
+            <!-- Шаг 1: Тип кожи -->
+            <div class="quiz-step active" data-step="1">
+                <h2 class="step-title">Какой у вас тип кожи?</h2>
+                <div class="options-grid">
+                    <div class="option-card" onclick="selectOption(this, 'skinType', 'normal')">
+                        <div class="option-icon">😊</div>
+                        <div class="option-text">Нормальная</div>
+                    </div>
+                    <div class="option-card" onclick="selectOption(this, 'skinType', 'dry')">
+                        <div class="option-icon">💧</div>
+                        <div class="option-text">Сухая</div>
+                    </div>
+                    <div class="option-card" onclick="selectOption(this, 'skinType', 'oily')">
+                        <div class="option-icon">✨</div>
+                        <div class="option-text">Жирная</div>
+                    </div>
+                    <div class="option-card" onclick="selectOption(this, 'skinType', 'combination')">
+                        <div class="option-icon">⚖️</div>
+                        <div class="option-text">Комбинированная</div>
+                    </div>
+                    <div class="option-card" onclick="selectOption(this, 'skinType', 'sensitive')">
+                        <div class="option-icon">🌸</div>
+                        <div class="option-text">Чувствительная</div>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-next" onclick="nextStep()">Далее →</button>
+                </div>
+            </div>
+            
+            <!-- Шаг 2: Проблемы кожи -->
+            <div class="quiz-step" data-step="2">
+                <h2 class="step-title">Какие проблемы кожи вас беспокоят?</h2>
+                <div class="options-grid">
+                    <div class="option-card" onclick="toggleOption(this, 'concerns', 'acne')">
+                        <div class="option-icon">🔴</div>
+                        <div class="option-text">Акне и высыпания</div>
+                    </div>
+                    <div class="option-card" onclick="toggleOption(this, 'concerns', 'wrinkles')">
+                        <div class="option-icon">📏</div>
+                        <div class="option-text">Морщины</div>
+                    </div>
+                    <div class="option-card" onclick="toggleOption(this, 'concerns', 'pigmentation')">
+                        <div class="option-icon">🎨</div>
+                        <div class="option-text">Пигментация</div>
+                    </div>
+                    <div class="option-card" onclick="toggleOption(this, 'concerns', 'dryness')">
+                        <div class="option-icon">🏜️</div>
+                        <div class="option-text">Сухость</div>
+                    </div>
+                    <div class="option-card" onclick="toggleOption(this, 'concerns', 'pores')">
+                        <div class="option-icon">⭕</div>
+                        <div class="option-text">Расширенные поры</div>
+                    </div>
+                    <div class="option-card" onclick="toggleOption(this, 'concerns', 'dullness')">
+                        <div class="option-icon">😴</div>
+                        <div class="option-text">Тусклый цвет</div>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-prev" onclick="prevStep()">← Назад</button>
+                    <button class="btn btn-next" onclick="nextStep()">Далее →</button>
+                </div>
+            </div>
+            
+            <!-- Шаг 3: Возраст -->
+            <div class="quiz-step" data-step="3">
+                <h2 class="step-title">Ваш возраст</h2>
+                <div class="options-grid">
+                    <div class="option-card" onclick="selectOption(this, 'age', '18-25')">
+                        <div class="option-icon">🌱</div>
+                        <div class="option-text">18-25 лет</div>
+                    </div>
+                    <div class="option-card" onclick="selectOption(this, 'age', '26-35')">
+                        <div class="option-icon">🌷</div>
+                        <div class="option-text">26-35 лет</div>
+                    </div>
+                    <div class="option-card" onclick="selectOption(this, 'age', '36-45')">
+                        <div class="option-icon">🌹</div>
+                        <div class="option-text">36-45 лет</div>
+                    </div>
+                    <div class="option-card" onclick="selectOption(this, 'age', '46+')">
+                        <div class="option-icon">🌺</div>
+                        <div class="option-text">46+ лет</div>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-prev" onclick="prevStep()">← Назад</button>
+                    <button class="btn btn-next" onclick="nextStep()">Показать результаты ✨</button>
+                </div>
+            </div>
+            
+            <!-- Результаты -->
+            <div class="results-container" id="resultsContainer">
+                <h2 class="results-title">Ваши персональные рекомендации</h2>
+                <p class="results-description" id="resultsDescription">
+                    На основе ваших ответов мы подобрали оптимальную программу ухода для вашей кожи.
+                </p>
+                
+                <div class="recommended-products" id="recommendedProducts">
+                    <!-- Товары добавятся через JS -->
+                </div>
+                
+                <div class="btn-group">
+                    <a href="catalog.html" class="btn btn-next">Перейти в каталог</a>
+                    <button class="btn btn-outline" onclick="restartQuiz()">Пройти заново</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>GLOW</h3>
+                    <p>Премиум косметика для вашей красоты</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Навигация</h4>
+                    <a href="catalog.html">Каталог</a>
+                    <a href="services.html">Услуги</a>
+                    <a href="blog.html">Блог</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Поддержка</h4>
+                    <a href="faq.html">FAQ</a>
+                    <a href="contacts.html">Контакты</a>
+                    <a href="policy.html">Политика конфиденциальности</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Мы в соцсетях</h4>
+                    <div class="social-links">
+                        <a href="#">Instagram</a>
+                        <a href="#">Telegram</a>
+                        <a href="#">VK</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 GLOW Cosmetics. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        let currentStep = 1;
+        const totalSteps = 3;
+        let answers = {
+            skinType: '',
+            concerns: [],
+            age: ''
+        };
+        
+        function updateProgress() {
+            const progress = ((currentStep - 1) / totalSteps) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+        
+        function showStep(step) {
+            document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+            document.querySelector(`.quiz-step[data-step="${step}"]`).classList.add('active');
+            updateProgress();
+        }
+        
+        function selectOption(element, field, value) {
+            const parent = element.parentElement;
+            parent.querySelectorAll('.option-card').forEach(card => card.classList.remove('selected'));
+            element.classList.add('selected');
+            answers[field] = value;
+        }
+        
+        function toggleOption(element, field, value) {
+            element.classList.toggle('selected');
+            if (answers[field].includes(value)) {
+                answers[field] = answers[field].filter(v => v !== value);
+            } else {
+                answers[field].push(value);
+            }
+        }
+        
+        function nextStep() {
+            if (currentStep < totalSteps) {
+                currentStep++;
+                showStep(currentStep);
+            } else {
+                showResults();
+            }
+        }
+        
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        }
+        
+        function showResults() {
+            document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+            document.getElementById('resultsContainer').style.display = 'block';
+            document.getElementById('progressBar').style.width = '100%';
+            
+            // Генерация рекомендаций
+            const products = [
+                { name: 'Увлажняющая сыворотка Hydra Boost', price: 2490, image: 'images/product1.jpg' },
+                { name: 'Очищающий гель Pure Balance', price: 1890, image: 'images/product2.jpg' },
+                { name: 'Ночной крем Repair & Restore', price: 3290, image: 'images/product3.jpg' },
+                { name: 'Витамин C Сияние', price: 2790, image: 'images/product4.jpg' }
+            ];
+            
+            const container = document.getElementById('recommendedProducts');
+            container.innerHTML = '';
+            
+            products.forEach(product => {
+                const div = document.createElement('div');
+                div.className = 'product-card';
+                div.innerHTML = `
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}">
+                    </div>
+                    <div class="product-name">${product.name}</div>
+                    <div class="product-price">${product.price.toLocaleString()} ₽</div>
+                    <button class="btn" style="width: 100%; margin-top: 15px;" onclick="addToCartFromQuiz('${product.name}', ${product.price})">В корзину</button>
+                `;
+                container.appendChild(div);
+            });
+            
+            // Персонализированное описание
+            const typeNames = {
+                normal: 'нормальной',
+                dry: 'сухой',
+                oily: 'жирной',
+                combination: 'комбинированной',
+                sensitive: 'чувствительной'
+            };
+            
+            document.getElementById('resultsDescription').textContent = 
+                `Для ${typeNames[answers.skinType] || 'вашей'} кожи${answers.age ? ` в возрасте ${answers.age}` : ''} мы рекомендуем следующий уход:`;
+        }
+        
+        function restartQuiz() {
+            currentStep = 1;
+            answers = { skinType: '', concerns: [], age: '' };
+            document.querySelectorAll('.option-card').forEach(card => card.classList.remove('selected'));
+            document.getElementById('resultsContainer').style.display = 'none';
+            showStep(1);
+        }
+        
+        function addToCartFromQuiz(name, price) {
+            const product = {
+                id: Date.now(),
+                title: name,
+                price: price,
+                image: 'images/product1.jpg',
+                quantity: 1
+            };
+            
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            cart.push(product);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            showNotification('Товар добавлен в корзину!', 'success');
+        }
+        
+        updateProgress();
+        updateCartCount();
+    </script>
+</body>
+</html>

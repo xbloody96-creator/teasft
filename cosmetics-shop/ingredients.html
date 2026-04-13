@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLOW Cosmetics - Энциклопедия ингредиентов</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;600;700&family=DM+Sans:opsz,wght@9..40,300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .ingredients-page { padding-top: 100px; }
+        .ingredients-hero { text-align: center; padding: 60px 20px; }
+        .page-title { font-family: 'Unbounded', sans-serif; font-size: 3rem; margin-bottom: 15px; color: var(--text-primary); }
+        
+        .ingredients-container { max-width: 1400px; margin: 0 auto; padding: 40px 20px; }
+        .search-bar { max-width: 600px; margin: 0 auto 40px; position: relative; }
+        .search-input { width: 100%; padding: 18px 25px; background: var(--card-bg); border: 2px solid var(--border-color); border-radius: 50px; color: var(--text-primary); font-size: 1.1rem; }
+        .search-input:focus { outline: none; border-color: var(--accent-pink); }
+        
+        .ingredients-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px; }
+        .ingredient-card { background: var(--card-bg); border-radius: 20px; padding: 30px; border: 1px solid var(--border-color); transition: all 0.3s ease; cursor: pointer; }
+        .ingredient-card:hover { border-color: var(--accent-pink); transform: translateY(-5px); }
+        .ingredient-icon { font-size: 3rem; margin-bottom: 15px; }
+        .ingredient-name { font-family: 'Unbounded', sans-serif; font-size: 1.3rem; margin-bottom: 10px; color: var(--text-primary); }
+        .ingredient-benefit { color: var(--accent-pink); font-weight: 600; margin-bottom: 12px; }
+        .ingredient-desc { color: var(--text-secondary); line-height: 1.7; font-size: 0.95rem; }
+        
+        @media (max-width: 768px) { .page-title { font-size: 2rem; } }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <a href="index.html" class="logo">GLOW</a>
+            <nav class="nav-menu">
+                <a href="index.html">Главная</a>
+                <a href="catalog.html">Каталог</a>
+                <a href="ingredients.html">Ингредиенты</a>
+                <a href="blog.html">Блог</a>
+            </nav>
+            <div class="header-actions">
+                <a href="cart.html" class="header-icon cart-icon">🛒<span class="cart-count">0</span></a>
+            </div>
+        </div>
+    </header>
+
+    <main class="ingredients-page">
+        <div class="ingredients-hero">
+            <h1 class="page-title">Энциклопедия ингредиентов</h1>
+            <p style="color: var(--text-secondary);">Узнайте всё о компонентах нашей косметики</p>
+        </div>
+        
+        <div class="ingredients-container">
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Поиск ингредиента..." id="searchInput">
+            </div>
+            
+            <div class="ingredients-grid">
+                <div class="ingredient-card">
+                    <div class="ingredient-icon">💧</div>
+                    <h3 class="ingredient-name">Гиалуроновая кислота</h3>
+                    <div class="ingredient-benefit">Интенсивное увлажнение</div>
+                    <p class="ingredient-desc">Удерживает до 1000 раз больше собственного веса в воде, обеспечивая глубокое увлажнение всех слоёв эпидермиса.</p>
+                </div>
+                
+                <div class="ingredient-card">
+                    <div class="ingredient-icon">🍊</div>
+                    <h3 class="ingredient-name">Витамин C</h3>
+                    <div class="ingredient-benefit">Сияние и защита</div>
+                    <p class="ingredient-desc">Мощный антиоксидант, выравнивает тон кожи, стимулирует выработку коллагена и защищает от свободных радикалов.</p>
+                </div>
+                
+                <div class="ingredient-card">
+                    <div class="ingredient-icon">🌿</div>
+                    <h3 class="ingredient-name">Ниацинамид</h3>
+                    <div class="ingredient-benefit">Выравнивание тона</div>
+                    <p class="ingredient-desc">Уменьшает расширенные поры, контролирует жирность кожи и борется с пигментацией.</p>
+                </div>
+                
+                <div class="ingredient-card">
+                    <div class="ingredient-icon">🥑</div>
+                    <h3 class="ingredient-name">Пантенол (B5)</h3>
+                    <div class="ingredient-benefit">Восстановление</div>
+                    <p class="ingredient-desc">Заживляет, успокаивает раздражённую кожу и восстанавливает защитный барьер.</p>
+                </div>
+                
+                <div class="ingredient-card">
+                    <div class="ingredient-icon">🌸</div>
+                    <h3 class="ingredient-name">Ретинол</h3>
+                    <div class="ingredient-benefit">Омоложение</div>
+                    <p class="ingredient-desc">Золотой стандарт антивозрастного ухода, уменьшает морщины и улучшает текстуру кожи.</p>
+                </div>
+                
+                <div class="ingredient-card">
+                    <div class="ingredient-icon">🍃</div>
+                    <h3 class="ingredient-name">Алоэ Вера</h3>
+                    <div class="ingredient-benefit">Успокоение</div>
+                    <p class="ingredient-desc">Натуральный увлажнитель с противовоспалительными свойствами, идеален для чувствительной кожи.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section"><h3>GLOW</h3></div>
+                <div class="footer-section"><h4>Навигация</h4><a href="catalog.html">Каталог</a></div>
+            </div>
+        </div>
+    </footer>
+    <script src="js/main.js"></script>
+    <script>
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const term = e.target.value.toLowerCase();
+            document.querySelectorAll('.ingredient-card').forEach(card => {
+                const text = card.textContent.toLowerCase();
+                card.style.display = text.includes(term) ? 'block' : 'none';
+            });
+        });
+        updateCartCount();
+    </script>
+</body>
+</html>
