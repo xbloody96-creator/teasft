@@ -1,635 +1,754 @@
 <!DOCTYPE html>
-<html lang="ru" data-theme="dark">
+<html lang="ru" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GLOW — Премиум косметика и уход за собой</title>
+    <title>BEAUTÉ — Косметика и услуги красоты</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
+<body class="light-theme">
 
-<!-- Topbar -->
-<div class="header-topbar">
-  <div class="topbar-inner">
-    <div style="overflow:hidden;flex:1">
-      <div class="topbar-scroll">
-        <span>Бесплатная доставка от 3000 ₽</span>
-        <span>Натуральные ингредиенты</span>
-        <span>Подарок к первому заказу</span>
-        <span>Работаем 24/7</span>
-        <span>Бесплатная доставка от 3000 ₽</span>
-        <span>Натуральные ингредиенты</span>
-        <span>Подарок к первому заказу</span>
-        <span>Работаем 24/7</span>
-      </div>
+<!-- Accessibility Panel -->
+<div class="a11y-panel" id="a11yPanel">
+    <div class="a11y-content">
+        <button class="a11y-close" onclick="toggleA11y()">✕</button>
+        <h3>Настройки доступности</h3>
+        <div class="a11y-group">
+            <label>Размер шрифта</label>
+            <div class="a11y-buttons">
+                <button onclick="adjustFont(-1)">A−</button>
+                <button onclick="adjustFont(1)">A+</button>
+                <button onclick="resetFont()">Сброс</button>
+            </div>
+        </div>
+        <div class="a11y-group">
+            <label>Контрастность</label>
+            <div class="a11y-buttons">
+                <button onclick="toggleContrastMode()">Высокий контраст</button>
+            </div>
+        </div>
+        <div class="a11y-group">
+            <label>Тема</label>
+            <div class="a11y-buttons">
+                <button onclick="setTheme('light')">☀️ Светлая</button>
+                <button onclick="setTheme('dark')">🌙 Тёмная</button>
+            </div>
+        </div>
     </div>
-    <div class="topbar-right">
-      <a href="tel:+79991234567">📞 +7 (999) 123-45-67</a>
-      <a href="#services">Услуги</a>
-    </div>
-  </div>
 </div>
 
 <!-- Header -->
-<header class="site-header">
-  <div class="header-inner container">
-
-    <!-- Logo -->
-    <a href="index.php" class="logo">
-      <div class="logo-mark">✨</div>
-      <div class="logo-text"><em>G</em>LOW</div>
-    </a>
-
-    <!-- Search -->
-    <form class="header-search" action="#" method="GET" autocomplete="off">
-      <input type="text" name="q" id="header-search-input"
-             placeholder="Поиск: крема, сыворотки, маски..."
-             value="">
-      <button type="submit">🔍</button>
-      <div class="search-suggestions" id="search-suggestions"></div>
-    </form>
-
-    <!-- Actions -->
-    <nav class="header-actions">
-      <a href="#profile" class="btn-icon">
-        <span class="icon">👤</span><small>Кабинет</small>
-      </a>
-
-      <a href="#favorites" class="btn-icon">
-        <span class="icon">❤️</span><small>Избранное</small>
-      </a>
-
-      <a href="#cart" class="btn-icon cart-btn">
-        <span class="icon">🛒</span>
-        <sup class="cart-badge">3</sup>
-        <small>Корзина</small>
-      </a>
-
-      <button class="btn-icon" id="themeToggle" title="Тема">
-        <span class="icon" id="themeIcon">☀️</span><small>Тема</small>
-      </button>
-
-      <button class="btn-icon" id="accessibilityBtn" title="Слабовидящим">
-        <span class="icon">🔎</span><small>A+</small>
-      </button>
-    </nav>
-  </div>
-
-  <!-- Nav bar -->
-  <nav class="header-nav">
-    <div class="nav-inner container">
-
-      <!-- Catalog dropdown -->
-      <div class="catalog-dropdown">
-        <button class="catalog-btn">
-          <div class="lines">
-            <span></span><span></span><span></span>
-          </div>
-          Каталог
-        </button>
-        <div class="catalog-menu">
-          <a href="#"><span>💄</span>Макияж</a>
-          <a href="#"><span>🧴</span>Уход за лицом</a>
-          <a href="#"><span>🚿</span>Уход за телом</a>
-          <a href="#"><span>💇</span>Уход за волосами</a>
-          <a href="#"><span>🌿</span>Натуральная косметика</a>
-          <a href="#"><span>☀️</span>SPF защита</a>
-          <a href="#"><span>🎁</span>Наборы и подарки</a>
-          <div style="height:1px;background:var(--border);margin:6px 0"></div>
-          <a href="#catalog"><span>📦</span>Все товары</a>
+<header class="main-header">
+    <div class="header-top">
+        <div class="container header-top-inner">
+            <div class="header-message">
+                <span class="message-icon">✨</span>
+                <span class="message-text">Бесплатная доставка от 2500 ₽ • Подарки в каждом заказе</span>
+            </div>
+            <div class="header-meta">
+                <a href="tel:+78001234567" class="contact-link">8 (800) 123-45-67</a>
+                <button class="a11y-trigger" onclick="toggleA11y()" title="Версия для слабовидящих">
+                    <span class="eye-icon">👁</span>
+                </button>
+            </div>
         </div>
-      </div>
-
-      <div class="nav-links">
-        <a href="#about">О нас</a>
-        <a href="#promotions">Акции</a>
-        <a href="#services">Услуги</a>
-        <a href="#contacts">Контакты</a>
-      </div>
     </div>
-  </nav>
+
+    <div class="header-main">
+        <div class="container header-main-inner">
+            <a href="/" class="brand-logo">
+                <div class="logo-symbol">B</div>
+                <div class="logo-wordmark">
+                    <span class="logo-main">BEAUTÉ</span>
+                    <span class="logo-tagline">косметика & уход</span>
+                </div>
+            </a>
+
+            <nav class="main-nav">
+                <a href="#catalog" class="nav-link nav-catalog">
+                    <span class="nav-icon">▤</span>
+                    Каталог
+                </a>
+                <a href="#services" class="nav-link">Услуги</a>
+                <a href="#about" class="nav-link">О бренде</a>
+                <a href="#blog" class="nav-link">Блог</a>
+                <a href="#contacts" class="nav-link">Контакты</a>
+            </nav>
+
+            <div class="header-actions">
+                <button class="action-btn search-trigger" onclick="toggleSearch()">
+                    <span class="btn-icon">🔍</span>
+                    <span class="btn-label">Поиск</span>
+                </button>
+                <a href="#favorites" class="action-btn">
+                    <span class="btn-icon">♡</span>
+                    <span class="btn-label">Избранное</span>
+                </a>
+                <a href="#profile" class="action-btn">
+                    <span class="btn-icon">👤</span>
+                    <span class="btn-label">Войти</span>
+                </a>
+                <a href="#cart" class="action-btn cart-btn">
+                    <span class="btn-icon">🛍</span>
+                    <span class="btn-label">Корзина</span>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-container">
+            <button class="search-close" onclick="toggleSearch()">✕</button>
+            <form class="search-form" action="#" method="GET">
+                <input type="text" name="q" placeholder="Что вы ищете сегодня?" class="search-input" autofocus>
+                <button type="submit" class="search-submit">Найти</button>
+            </form>
+            <div class="search-popular">
+                <span class="popular-label">Популярные запросы:</span>
+                <a href="#" class="popular-tag">сыворотка</a>
+                <a href="#" class="popular-tag">крем для лица</a>
+                <a href="#" class="popular-tag">масло для волос</a>
+                <a href="#" class="popular-tag">spf защита</a>
+            </div>
+        </div>
+    </div>
 </header>
 
-<!-- Accessibility bar -->
-<div class="accessibility-bar" id="accessibilityBar" style="display:none;">
-  <div class="container">
-    <span>👁 Слабовидящим:</span>
-    <button onclick="changeFont(-1)">A−</button>
-    <button onclick="changeFont(1)">A+</button>
-    <button onclick="toggleContrast()">Контраст</button>
-    <button onclick="document.getElementById('accessibilityBar').style.display='none'" style="margin-left:auto">✕</button>
-  </div>
-</div>
+<main class="site-content">
 
-<main class="site-main">
-
-<!-- HERO SLIDER -->
-<div class="hero-slider">
-    <div class="slider-track">
-        <!-- Slide 1 -->
-        <div class="slide">
-            <div class="slide-bg slide-bg-1"></div>
-            <div class="slide-glow"></div>
-            <div class="slide-grid"></div>
-            <div class="slide-content">
-                <div class="slide-tag">✨ Новинка</div>
-                <h2>Сыворотка с витамином C</h2>
-                <p>Интенсивное сияние вашей кожи всего за 7 дней. Натуральные компоненты.</p>
-                <div class="slide-prices">
-                    <span class="slide-price">2 490 ₽</span>
-                    <span class="slide-old">3 200 ₽</span>
-                    <span class="slide-pct">-22%</span>
-                </div>
-                <a href="#product" class="slide-btn">Подробнее →</a>
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="hero-bg">
+        <div class="hero-gradient"></div>
+        <div class="hero-pattern"></div>
+    </div>
+    <div class="container hero-content">
+        <div class="hero-text">
+            <span class="hero-badge">Новая коллекция 2025</span>
+            <h1 class="hero-title">
+                Раскройте свою<br>
+                <em>естественную красоту</em>
+            </h1>
+            <p class="hero-description">
+                Премиальная косметика с натуральными ингредиентами.<br>
+                Создана профессионалами для тех, кто ценит качество.
+            </p>
+            <div class="hero-buttons">
+                <a href="#catalog" class="btn btn-primary btn-large">
+                    Смотреть каталог
+                    <span class="btn-arrow">→</span>
+                </a>
+                <a href="#services" class="btn btn-outline btn-large">
+                    Наши услуги
+                </a>
             </div>
-            <div class="slide-image-wrap">
-                <div style="font-size:12rem;filter:drop-shadow(0 20px 60px rgba(0,0,0,0.8));animation:float 4s ease-in-out infinite;">🧴</div>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-value">5000+</span>
+                    <span class="stat-label">довольных клиентов</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">200+</span>
+                    <span class="stat-label">брендов</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">4.9</span>
+                    <span class="stat-label">рейтинг</span>
+                </div>
             </div>
         </div>
-        <!-- Slide 2 -->
-        <div class="slide">
-            <div class="slide-bg slide-bg-2"></div>
-            <div class="slide-glow"></div>
-            <div class="slide-grid"></div>
-            <div class="slide-content">
-                <div class="slide-tag">🔥 Хит продаж</div>
-                <h2>Набор для идеальной кожи</h2>
-                <p>Полный ритуал ухода: очищение, тонизирование, увлажнение.</p>
-                <div class="slide-prices">
-                    <span class="slide-price">5 990 ₽</span>
-                    <span class="slide-old">8 500 ₽</span>
-                    <span class="slide-pct">-30%</span>
+        <div class="hero-visual">
+            <div class="hero-image-wrapper">
+                <div class="floating-element float-1">💧</div>
+                <div class="floating-element float-2">🌸</div>
+                <div class="floating-element float-3">✨</div>
+                <div class="hero-placeholder">
+                    <div class="placeholder-inner">
+                        <span class="placeholder-emoji">🧴</span>
+                        <span class="placeholder-label">Premium Care</span>
+                    </div>
                 </div>
-                <a href="#product" class="slide-btn">Подробнее →</a>
-            </div>
-            <div class="slide-image-wrap">
-                <div style="font-size:12rem;filter:drop-shadow(0 20px 60px rgba(0,0,0,0.8));animation:float 4s ease-in-out infinite;">🎁</div>
-            </div>
-        </div>
-        <!-- Slide 3 -->
-        <div class="slide">
-            <div class="slide-bg slide-bg-3"></div>
-            <div class="slide-glow"></div>
-            <div class="slide-grid"></div>
-            <div class="slide-content">
-                <div class="slide-tag">💎 Премиум</div>
-                <h2>Люксовая коллекция</h2>
-                <p>Эксклюзивные формулы от ведущих мировых брендов.</p>
-                <div class="slide-prices">
-                    <span class="slide-price">12 990 ₽</span>
-                </div>
-                <a href="#product" class="slide-btn">Подробнее →</a>
-            </div>
-            <div class="slide-image-wrap">
-                <div style="font-size:12rem;filter:drop-shadow(0 20px 60px rgba(0,0,0,0.8));animation:float 4s ease-in-out infinite;">💄</div>
             </div>
         </div>
     </div>
-    <button class="slider-prev">‹</button>
-    <button class="slider-next">›</button>
-    <div class="slider-controls">
-        <button class="slider-dot active" data-index="0"></button>
-        <button class="slider-dot" data-index="1"></button>
-        <button class="slider-dot" data-index="2"></button>
+</section>
+
+<!-- Categories Grid -->
+<section class="categories-section" id="catalog">
+    <div class="container">
+        <div class="section-header-center">
+            <span class="section-subtitle">Каталог продукции</span>
+            <h2 class="section-title">Выберите категорию</h2>
+        </div>
+        <div class="categories-grid">
+            <a href="#" class="category-card category-1">
+                <div class="category-icon">💄</div>
+                <div class="category-info">
+                    <h3>Макияж</h3>
+                    <p>Помады, тени, тушь и всё для идеального образа</p>
+                    <span class="category-count">320 товаров</span>
+                </div>
+            </a>
+            <a href="#" class="category-card category-2">
+                <div class="category-icon">🧴</div>
+                <div class="category-info">
+                    <h3>Уход за лицом</h3>
+                    <p>Кремы, сыворотки, маски для сияющей кожи</p>
+                    <span class="category-count">485 товаров</span>
+                </div>
+            </a>
+            <a href="#" class="category-card category-3">
+                <div class="category-icon">🚿</div>
+                <div class="category-info">
+                    <h3>Уход за телом</h3>
+                    <p>Лосьоны, скрабы, масла для нежной кожи</p>
+                    <span class="category-count">210 товаров</span>
+                </div>
+            </a>
+            <a href="#" class="category-card category-4">
+                <div class="category-icon">💇</div>
+                <div class="category-info">
+                    <h3>Уход за волосами</h3>
+                    <p>Шампуни, кондиционеры, маски для здоровья волос</p>
+                    <span class="category-count">195 товаров</span>
+                </div>
+            </a>
+            <a href="#" class="category-card category-5">
+                <div class="category-icon">🌿</div>
+                <div class="category-info">
+                    <h3>Натуральная косметика</h3>
+                    <p>Органические средства без химических добавок</p>
+                    <span class="category-count">150 товаров</span>
+                </div>
+            </a>
+            <a href="#" class="category-card category-6">
+                <div class="category-icon">☀️</div>
+                <div class="category-info">
+                    <h3>SPF защита</h3>
+                    <p>Защита от солнца для лица и тела</p>
+                    <span class="category-count">85 товаров</span>
+                </div>
+            </a>
+        </div>
     </div>
-</div>
+</section>
 
-<div class="container">
-    <!-- КАТЕГОРИИ -->
-    <section style="padding:28px 0 0">
-        <div class="categories-strip">
-            <a href="#" class="cat-pill">
-                <span class="cat-icon">💄</span>
-                <span>Макияж</span>
-            </a>
-            <a href="#" class="cat-pill">
-                <span class="cat-icon">🧴</span>
-                <span>Лицо</span>
-            </a>
-            <a href="#" class="cat-pill">
-                <span class="cat-icon">🚿</span>
-                <span>Тело</span>
-            </a>
-            <a href="#" class="cat-pill">
-                <span class="cat-icon">💇</span>
-                <span>Волосы</span>
-            </a>
-            <a href="#" class="cat-pill">
-                <span class="cat-icon">🌿</span>
-                <span>Натуральное</span>
-            </a>
-            <a href="#" class="cat-pill">
-                <span class="cat-icon">☀️</span>
-                <span>SPF</span>
-            </a>
-            <a href="#" class="cat-pill">
-                <span class="cat-icon">🎁</span>
-                <span>Наборы</span>
-            </a>
-            <a href="#catalog" class="cat-pill">
-                <span class="cat-icon">📦</span>
-                <span>Все товары</span>
-            </a>
-        </div>
-    </section>
-
-    <!-- ПРОМО-БАННЕРЫ -->
-    <section style="padding:20px 0 0" id="promotions">
-        <div class="promo-strip">
-            <a href="#" class="promo-card promo-card-1" style="text-decoration:none">
-                <div class="promo-orb"></div>
-                <div class="promo-num">-30%</div>
-                <div class="promo-title">Распродажа сезона</div>
-                <div class="promo-sub">На избранные товары до конца недели</div>
-            </a>
-            <a href="#" class="promo-card promo-card-2" style="text-decoration:none">
-                <div class="promo-orb"></div>
-                <div class="promo-num">-20%</div>
-                <div class="promo-title">Первый заказ</div>
-                <div class="promo-sub">Скидка новым клиентам на всё</div>
-            </a>
-            <a href="#" class="promo-card promo-card-3" style="text-decoration:none">
-                <div class="promo-orb"></div>
-                <div class="promo-num">🎁</div>
-                <div class="promo-title">Подарки</div>
-                <div class="promo-sub">При заказе от 5000 ₽</div>
-            </a>
-        </div>
-    </section>
-
-    <!-- ПОИСК -->
-    <section id="search" style="padding:28px 0 0">
-        <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:28px;display:flex;align-items:center;gap:20px;flex-wrap:wrap">
-            <div style="flex:1;min-width:280px">
-                <div style="font-family:var(--font-d);font-size:0.85rem;font-weight:700;margin-bottom:6px">🔍 Быстрый поиск</div>
-                <p style="font-size:0.8rem;color:var(--text3)">Найдите идеальные средства для вашего типа кожи</p>
+<!-- Services Section -->
+<section class="services-section" id="services">
+    <div class="services-bg"></div>
+    <div class="container">
+        <div class="section-header-split">
+            <div class="section-header-left">
+                <span class="section-subtitle">Профессиональные услуги</span>
+                <h2 class="section-title">Beauty-сервис</h2>
             </div>
-            <form action="#" method="GET" style="display:flex;gap:8px;flex:1;min-width:280px;position:relative">
-                <input type="text" name="q" placeholder="Введите название товара..."
-                       style="flex:1;padding:11px 16px;background:var(--surface2);border:1.5px solid var(--border2);border-radius:var(--radius);color:var(--text);font-size:0.88rem"
-                       id="hero-search">
-                <button type="submit" class="btn-primary" style="width:auto;padding:11px 20px;white-space:nowrap">Найти</button>
-            </form>
+            <div class="section-header-right">
+                <p class="section-description">
+                    Наши специалисты помогут подобрать идеальные средства<br>
+                    и проведут индивидуальные консультации
+                </p>
+                <a href="#book" class="btn btn-primary">Записаться</a>
+            </div>
         </div>
-    </section>
+        <div class="services-list">
+            <div class="service-item">
+                <div class="service-number">01</div>
+                <div class="service-content">
+                    <div class="service-header">
+                        <h3 class="service-name">Консультация косметолога</h3>
+                        <span class="service-price">от 1 500 ₽</span>
+                    </div>
+                    <p class="service-description">Индивидуальный анализ типа кожи, подбор домашнего ухода, рекомендации по процедурам</p>
+                    <ul class="service-features">
+                        <li>⏱ 45 минут</li>
+                        <li>📋 План ухода в подарок</li>
+                        <li>🎁 Скидка 15% на продукцию</li>
+                    </ul>
+                </div>
+                <div class="service-action">
+                    <button class="btn btn-outline">Записаться</button>
+                </div>
+            </div>
+            <div class="service-item">
+                <div class="service-number">02</div>
+                <div class="service-content">
+                    <div class="service-header">
+                        <h3 class="service-name">Визаж для особого случая</h3>
+                        <span class="service-price">от 3 000 ₽</span>
+                    </div>
+                    <p class="service-description">Создание идеального макияжа для свадьбы, фотосессии или важного мероприятия</p>
+                    <ul class="service-features">
+                        <li>⏱ 1.5 часа</li>
+                        <li>💄 Премиум косметика</li>
+                        <li>📸 Фото после макияжа</li>
+                    </ul>
+                </div>
+                <div class="service-action">
+                    <button class="btn btn-outline">Записаться</button>
+                </div>
+            </div>
+            <div class="service-item">
+                <div class="service-number">03</div>
+                <div class="service-content">
+                    <div class="service-header">
+                        <h3 class="service-name">Beauty Box подписка</h3>
+                        <span class="service-price">от 990 ₽/мес</span>
+                    </div>
+                    <p class="service-description">Ежемесячная коробка с новинками косметики и полноразмерными продуктами</p>
+                    <ul class="service-features">
+                        <li>📦 5-7 продуктов</li>
+                        <li>🎯 Персональный подбор</li>
+                        <li>🚚 Бесплатная доставка</li>
+                    </ul>
+                </div>
+                <div class="service-action">
+                    <button class="btn btn-outline">Подписаться</button>
+                </div>
+            </div>
+            <div class="service-item">
+                <div class="service-number">04</div>
+                <div class="service-content">
+                    <div class="service-header">
+                        <h3 class="service-name">Подарочные сертификаты</h3>
+                        <span class="service-price">от 1 000 ₽</span>
+                    </div>
+                    <p class="service-description">Идеальный подарок для близких — сертификат на любую сумму в нашем бутике</p>
+                    <ul class="service-features">
+                        <li>💳 Любая сумма</li>
+                        <li>🎨 Красивое оформление</li>
+                        <li>📧 Электронный или бумажный</li>
+                    </ul>
+                </div>
+                <div class="service-action">
+                    <button class="btn btn-outline">Купить</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-    <!-- ПОПУЛЯРНЫЕ ТОВАРЫ -->
-    <section class="section">
-        <div class="section-header">
-            <h2 class="section-title"><span class="dot"></span> Хиты продаж</h2>
-            <a href="#catalog" class="section-more">Смотреть все</a>
+<!-- Featured Products -->
+<section class="products-section">
+    <div class="container">
+        <div class="section-header-center">
+            <span class="section-subtitle">Лучший выбор</span>
+            <h2 class="section-title">Популярные товары</h2>
+            <div class="section-tabs">
+                <button class="tab-btn active" data-tab="all">Все</button>
+                <button class="tab-btn" data-tab="new">Новинки</button>
+                <button class="tab-btn" data-tab="hit">Хиты</button>
+                <button class="tab-btn" data-tab="sale">Акции</button>
+            </div>
         </div>
         <div class="products-grid">
-            <!-- Product 1 -->
-            <div class="product-card">
-                <span class="badge badge-popular">🔥 Хит</span>
-                <div class="product-card-img-wrap">
-                    <div class="product-card-img-placeholder">🧴</div>
-                    <div class="product-card-actions">
-                        <button class="quick-act">❤️</button>
-                        <button class="quick-act">👁️</button>
+            <div class="product-card" data-category="hit">
+                <div class="product-badge badge-hot">🔥 Хит</div>
+                <button class="product-wishlist">♡</button>
+                <div class="product-image">
+                    <span class="image-placeholder">🧴</span>
+                </div>
+                <div class="product-info">
+                    <div class="product-brand">LA ROCHE-POSAY</div>
+                    <h3 class="product-name">Гиалуроновая сыворотка Hyalu B5</h3>
+                    <div class="product-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-count">(128)</span>
                     </div>
-                </div>
-                <div class="product-card-body">
-                    <div class="product-card-name">Увлажняющий крем с гиалуроновой кислотой</div>
-                    <div class="product-card-stock in-stock">✓ В наличии</div>
-                    <div class="product-card-price">1 890 ₽</div>
-                </div>
-                <div class="product-card-footer">
-                    <button class="btn-buy">В корзину</button>
-                    <button class="btn-fav">❤️</button>
+                    <div class="product-price-block">
+                        <span class="current-price">2 890 ₽</span>
+                    </div>
+                    <button class="btn btn-cart">В корзину</button>
                 </div>
             </div>
-            <!-- Product 2 -->
-            <div class="product-card">
-                <span class="badge badge-sale">-25%</span>
-                <div class="product-card-img-wrap">
-                    <div class="product-card-img-placeholder">💧</div>
-                    <div class="product-card-actions">
-                        <button class="quick-act">❤️</button>
-                        <button class="quick-act">👁️</button>
-                    </div>
+            <div class="product-card" data-category="new">
+                <div class="product-badge badge-new">NEW</div>
+                <button class="product-wishlist">♡</button>
+                <div class="product-image">
+                    <span class="image-placeholder">💧</span>
                 </div>
-                <div class="product-card-body">
-                    <div class="product-card-name">Сыворотка с витамином C для сияния</div>
-                    <div class="product-card-stock in-stock">✓ В наличии</div>
-                    <div class="product-card-price">
-                        <span class="product-card-old">3 200 ₽</span>
-                        2 490 ₽
+                <div class="product-info">
+                    <div class="product-brand">THE ORDINARY</div>
+                    <h3 class="product-name">Niacinamide 10% + Zinc 1%</h3>
+                    <div class="product-rating">
+                        <span class="stars">★★★★☆</span>
+                        <span class="rating-count">(89)</span>
                     </div>
-                </div>
-                <div class="product-card-footer">
-                    <button class="btn-buy">В корзину</button>
-                    <button class="btn-fav">❤️</button>
+                    <div class="product-price-block">
+                        <span class="current-price">890 ₽</span>
+                    </div>
+                    <button class="btn btn-cart">В корзину</button>
                 </div>
             </div>
-            <!-- Product 3 -->
-            <div class="product-card">
-                <span class="badge badge-new">NEW</span>
-                <div class="product-card-img-wrap">
-                    <div class="product-card-img-placeholder">🌙</div>
-                    <div class="product-card-actions">
-                        <button class="quick-act">❤️</button>
-                        <button class="quick-act">👁️</button>
+            <div class="product-card" data-category="sale">
+                <div class="product-badge badge-sale">-25%</div>
+                <button class="product-wishlist">♡</button>
+                <div class="product-image">
+                    <span class="image-placeholder">🌙</span>
+                </div>
+                <div class="product-info">
+                    <div class="product-brand">CERAVE</div>
+                    <h3 class="product-name">Ночной увлажняющий крем</h3>
+                    <div class="product-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-count">(256)</span>
                     </div>
-                </div>
-                <div class="product-card-body">
-                    <div class="product-card-name">Ночной восстанавливающий комплекс</div>
-                    <div class="product-card-stock in-stock">✓ В наличии</div>
-                    <div class="product-card-price">3 450 ₽</div>
-                </div>
-                <div class="product-card-footer">
-                    <button class="btn-buy">В корзину</button>
-                    <button class="btn-fav">❤️</button>
+                    <div class="product-price-block">
+                        <span class="old-price">1 990 ₽</span>
+                        <span class="current-price">1 490 ₽</span>
+                    </div>
+                    <button class="btn btn-cart">В корзину</button>
                 </div>
             </div>
-            <!-- Product 4 -->
-            <div class="product-card">
-                <div class="product-card-img-wrap">
-                    <div class="product-card-img-placeholder">🧼</div>
-                    <div class="product-card-actions">
-                        <button class="quick-act">❤️</button>
-                        <button class="quick-act">👁️</button>
+            <div class="product-card" data-category="hit">
+                <div class="product-badge badge-hot">🔥 Хит</div>
+                <button class="product-wishlist">♡</button>
+                <div class="product-image">
+                    <span class="image-placeholder">☀️</span>
+                </div>
+                <div class="product-info">
+                    <div class="product-brand">BIODERMA</div>
+                    <h3 class="product-name">Мицеллярная вода Sensibio H2O</h3>
+                    <div class="product-rating">
+                        <span class="stars">★★★★★</span>
+                        <span class="rating-count">(412)</span>
                     </div>
-                </div>
-                <div class="product-card-body">
-                    <div class="product-card-name">Мягкая пенка для умывания</div>
-                    <div class="product-card-stock in-stock">✓ В наличии</div>
-                    <div class="product-card-price">1 250 ₽</div>
-                </div>
-                <div class="product-card-footer">
-                    <button class="btn-buy">В корзину</button>
-                    <button class="btn-fav">❤️</button>
+                    <div class="product-price-block">
+                        <span class="current-price">1 250 ₽</span>
+                    </div>
+                    <button class="btn btn-cart">В корзину</button>
                 </div>
             </div>
         </div>
-    </section>
+        <div class="section-footer">
+            <a href="#catalog" class="btn btn-outline btn-large">Смотреть весь каталог</a>
+        </div>
+    </div>
+</section>
 
-    <!-- УСЛУГИ -->
-    <section class="services-section" id="services">
-        <div style="text-align:center;max-width:600px;margin:0 auto">
-            <h2 style="font-family:var(--font-d);font-size:1.6rem;font-weight:900;margin-bottom:10px">Наши <span style="color:var(--accent)">услуги</span></h2>
-            <p style="color:var(--text2)">Профессиональный подход к вашей красоте</p>
-        </div>
-        <div class="services-grid">
-            <div class="service-card">
-                <div class="service-icon">💆‍♀️</div>
-                <div class="service-title">Консультация косметолога</div>
-                <div class="service-desc">Индивидуальный подбор средств для вашего типа кожи</div>
+<!-- Promo Banner -->
+<section class="promo-banner-section">
+    <div class="container">
+        <div class="promo-banner">
+            <div class="promo-content">
+                <span class="promo-label">Ограниченное предложение</span>
+                <h2 class="promo-title">Скидка 20% на первый заказ</h2>
+                <p class="promo-text">Зарегистрируйтесь сейчас и получите промокод на скидку</p>
+                <form class="promo-form">
+                    <input type="email" placeholder="Ваш email" class="promo-input" required>
+                    <button type="submit" class="btn btn-primary">Получить скидку</button>
+                </form>
             </div>
-            <div class="service-card">
-                <div class="service-icon">🎨</div>
-                <div class="service-title">Макияж от визажиста</div>
-                <div class="service-desc">Профессиональный макияж для особых случаев</div>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">📦</div>
-                <div class="service-title">Beauty Box подписка</div>
-                <div class="service-desc">Ежемесячные наборы премиум косметики</div>
-            </div>
-            <div class="service-card">
-                <div class="service-icon">🎁</div>
-                <div class="service-title">Подарочные сертификаты</div>
-                <div class="service-desc">Идеальный подарок для близких</div>
+            <div class="promo-decoration">
+                <div class="promo-circle"></div>
+                <div class="promo-circle"></div>
+                <div class="promo-circle"></div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- НОВИНКИ -->
-    <section class="section" style="padding-top:0">
-        <div class="section-header">
-            <h2 class="section-title"><span class="dot" style="background:var(--success);box-shadow:0 0 12px var(--success)"></span> Новинки</h2>
-            <a href="#catalog" class="section-more">Смотреть все</a>
-        </div>
-        <div class="products-grid">
-            <!-- Product 5 -->
-            <div class="product-card">
-                <span class="badge badge-new">NEW</span>
-                <div class="product-card-img-wrap">
-                    <div class="product-card-img-placeholder">🌸</div>
-                    <div class="product-card-actions">
-                        <button class="quick-act">❤️</button>
-                        <button class="quick-act">👁️</button>
+<!-- About Section -->
+<section class="about-section" id="about">
+    <div class="container">
+        <div class="about-grid">
+            <div class="about-content">
+                <span class="section-subtitle">О бренде BEAUTÉ</span>
+                <h2 class="section-title">Мы верим в силу естественной красоты</h2>
+                <p class="about-text">
+                    С 2015 года мы помогаем людям находить идеальные средства для ухода за собой. 
+                    Наша миссия — сделать качественную косметику доступной и предоставить каждому 
+                    возможность почувствовать себя уверенно.
+                </p>
+                <div class="about-features">
+                    <div class="feature-item">
+                        <span class="feature-icon">🌱</span>
+                        <div class="feature-text">
+                            <strong>Натуральные ингредиенты</strong>
+                            <span>Только проверенные безопасные компоненты</span>
+                        </div>
                     </div>
-                </div>
-                <div class="product-card-body">
-                    <div class="product-card-name">Цветочная вода розы</div>
-                    <div class="product-card-stock in-stock">✓ В наличии</div>
-                    <div class="product-card-price">990 ₽</div>
-                </div>
-                <div class="product-card-footer">
-                    <button class="btn-buy">В корзину</button>
-                    <button class="btn-fav">❤️</button>
+                    <div class="feature-item">
+                        <span class="feature-icon">🐰</span>
+                        <div class="feature-text">
+                            <strong>Cruelty Free</strong>
+                            <span>Не тестируем на животных</span>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">♻️</span>
+                        <div class="feature-text">
+                            <strong>Эко-упаковка</strong>
+                            <span>Заботимся об окружающей среде</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!-- Product 6 -->
-            <div class="product-card">
-                <span class="badge badge-new">NEW</span>
-                <div class="product-card-img-wrap">
-                    <div class="product-card-img-placeholder">🥑</div>
-                    <div class="product-card-actions">
-                        <button class="quick-act">❤️</button>
-                        <button class="quick-act">👁️</button>
-                    </div>
-                </div>
-                <div class="product-card-body">
-                    <div class="product-card-name">Маска с авокадо питательная</div>
-                    <div class="product-card-stock in-stock">✓ В наличии</div>
-                    <div class="product-card-price">1 450 ₽</div>
-                </div>
-                <div class="product-card-footer">
-                    <button class="btn-buy">В корзину</button>
-                    <button class="btn-fav">❤️</button>
-                </div>
-            </div>
-            <!-- Product 7 -->
-            <div class="product-card">
-                <span class="badge badge-new">NEW</span>
-                <div class="product-card-img-wrap">
-                    <div class="product-card-img-placeholder">🍵</div>
-                    <div class="product-card-actions">
-                        <button class="quick-act">❤️</button>
-                        <button class="quick-act">👁️</button>
-                    </div>
-                </div>
-                <div class="product-card-body">
-                    <div class="product-card-name">Зелёный чай антиоксидант</div>
-                    <div class="product-card-stock in-stock">✓ В наличии</div>
-                    <div class="product-card-price">1 790 ₽</div>
-                </div>
-                <div class="product-card-footer">
-                    <button class="btn-buy">В корзину</button>
-                    <button class="btn-fav">❤️</button>
-                </div>
-            </div>
-            <!-- Product 8 -->
-            <div class="product-card">
-                <span class="badge badge-new">NEW</span>
-                <div class="product-card-img-wrap">
-                    <div class="product-card-img-placeholder">⚡</div>
-                    <div class="product-card-actions">
-                        <button class="quick-act">❤️</button>
-                        <button class="quick-act">👁️</button>
-                    </div>
-                </div>
-                <div class="product-card-body">
-                    <div class="product-card-name">Энергетический крем для глаз</div>
-                    <div class="product-card-stock in-stock">✓ В наличии</div>
-                    <div class="product-card-price">2 100 ₽</div>
-                </div>
-                <div class="product-card-footer">
-                    <button class="btn-buy">В корзину</button>
-                    <button class="btn-fav">❤️</button>
+            <div class="about-visual">
+                <div class="about-image-placeholder">
+                    <span class="placeholder-big">✨</span>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- О НАС -->
-    <section class="section" id="about" style="padding-top:0">
-        <div class="about-section">
-            <div class="about-text">
-                <h2>О нашем <span>магазине</span></h2>
-                <p>GLOW — это премиальный магазин натуральной и профессиональной косметики. Мы тщательно отбираем лучшие бренды со всего мира, чтобы вы могли наслаждаться качеством и эффективностью.</p>
-                <p>Наша миссия — помочь каждому раскрыть свою естественную красоту с помощью безопасных и действенных средств.</p>
+<!-- Testimonials -->
+<section class="testimonials-section">
+    <div class="container">
+        <div class="section-header-center">
+            <span class="section-subtitle">Отзывы клиентов</span>
+            <h2 class="section-title">Что говорят о нас</h2>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar">А</div>
+                    <div class="testimonial-meta">
+                        <strong>Анна К.</strong>
+                        <span>Москва</span>
+                    </div>
+                    <div class="testimonial-stars">★★★★★</div>
+                </div>
+                <p class="testimonial-text">«Лучший магазин косметики! Консультанты помогли подобрать идеальный уход, кожа преобразилась за месяц. Доставка быстрая, подарки приятные!»</p>
             </div>
-            <div class="about-stats">
-                <div class="about-stat"><strong>15 000+</strong><span>Довольных клиентов</span></div>
-                <div class="about-stat"><strong>3 000+</strong><span>Товаров в наличии</span></div>
-                <div class="about-stat"><strong>24/7</strong><span>Служба поддержки</span></div>
-                <div class="about-stat"><strong>100%</strong><span>Оригинальная продукция</span></div>
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar">М</div>
+                    <div class="testimonial-meta">
+                        <strong>Мария В.</strong>
+                        <span>Санкт-Петербург</span>
+                    </div>
+                    <div class="testimonial-stars">★★★★★</div>
+                </div>
+                <p class="testimonial-text">«Заказываю уже третий раз. Очень нравится ассортимент и цены. Beauty Box — это просто находка, каждый месяц новые открытия!»</p>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar">Е</div>
+                    <div class="testimonial-meta">
+                        <strong>Елена С.</strong>
+                        <span>Казань</span>
+                    </div>
+                    <div class="testimonial-stars">★★★★★</div>
+                </div>
+                <p class="testimonial-text">«Проходила консультацию косметолога — очень профессионально! Получила подробный план ухода и скидку на продукцию. Рекомендую!»</p>
             </div>
         </div>
-    </section>
-</div><!-- /container -->
+    </div>
+</section>
+
+<!-- Blog Section -->
+<section class="blog-section" id="blog">
+    <div class="container">
+        <div class="section-header-split">
+            <div class="section-header-left">
+                <span class="section-subtitle">Блог</span>
+                <h2 class="section-title">Советы экспертов</h2>
+            </div>
+            <div class="section-header-right">
+                <a href="#blog" class="btn btn-outline">Читать все статьи</a>
+            </div>
+        </div>
+        <div class="blog-grid">
+            <article class="blog-card blog-card-large">
+                <div class="blog-image">
+                    <span class="blog-placeholder">📝</span>
+                </div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span class="blog-category">Уход за кожей</span>
+                        <span class="blog-date">15 января 2025</span>
+                    </div>
+                    <h3 class="blog-title">Как правильно построить вечерний ритуал ухода за кожей</h3>
+                    <p class="blog-excerpt">Пошаговое руководство по созданию идеальной процедуры очищения и восстановления кожи перед сном</p>
+                    <a href="#" class="blog-link">Читать далее →</a>
+                </div>
+            </article>
+            <div class="blog-cards-small">
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <span class="blog-placeholder">💄</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-category">Макияж</span>
+                            <span class="blog-date">12 января 2025</span>
+                        </div>
+                        <h3 class="blog-title">Тренды макияжа 2025</h3>
+                        <a href="#" class="blog-link">Читать →</a>
+                    </div>
+                </article>
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <span class="blog-placeholder">🌿</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-category">Ингредиенты</span>
+                            <span class="blog-date">10 января 2025</span>
+                        </div>
+                        <h3 class="blog-title">Гиалуроновая кислота: мифы и правда</h3>
+                        <a href="#" class="blog-link">Читать →</a>
+                    </div>
+                </article>
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <span class="blog-placeholder">☀️</span>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-category">Защита</span>
+                            <span class="blog-date">8 января 2025</span>
+                        </div>
+                        <h3 class="blog-title">Зачем нужен SPF зимой</h3>
+                        <a href="#" class="blog-link">Читать →</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contacts Section -->
+<section class="contacts-section" id="contacts">
+    <div class="container">
+        <div class="contacts-wrapper">
+            <div class="contacts-info">
+                <span class="section-subtitle">Контакты</span>
+                <h2 class="section-title">Свяжитесь с нами</h2>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <span class="contact-icon">📍</span>
+                        <div>
+                            <strong>Адрес</strong>
+                            <p>г. Москва, ул. Красоты, д. 15</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">📞</span>
+                        <div>
+                            <strong>Телефон</strong>
+                            <p>8 (800) 123-45-67</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">✉️</span>
+                        <div>
+                            <strong>Email</strong>
+                            <p>hello@beaute.ru</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">🕐</span>
+                        <div>
+                            <strong>Режим работы</strong>
+                            <p>Ежедневно 9:00 — 21:00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="#" class="social-link">Telegram</a>
+                    <a href="#" class="social-link">VKontakte</a>
+                    <a href="#" class="social-link">WhatsApp</a>
+                </div>
+            </div>
+            <div class="contacts-form-wrapper">
+                <form class="contacts-form">
+                    <h3>Напишите нам</h3>
+                    <div class="form-row">
+                        <input type="text" placeholder="Ваше имя" required>
+                        <input type="email" placeholder="Email" required>
+                    </div>
+                    <input type="text" placeholder="Тема">
+                    <textarea placeholder="Сообщение" rows="5" required></textarea>
+                    <button type="submit" class="btn btn-primary btn-full">Отправить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
 
 </main>
 
 <!-- Footer -->
-<footer class="site-footer" id="contacts">
-    <div class="footer-accent-bar"></div>
-    <div class="footer-grid container">
-        <div class="footer-col">
-            <a href="#" class="logo">
-                <div class="logo-mark">✨</div>
-                <div class="logo-text"><em>G</em>LOW</div>
-            </a>
-            <p class="footer-desc">Премиальная косметика для тех, кто ценит качество и заботится о своей красоте.</p>
-            <div class="footer-socials">
-                <a href="#" class="social-btn">📷</a>
-                <a href="#" class="social-btn">📘</a>
-                <a href="#" class="social-btn">🐦</a>
-                <a href="#" class="social-btn">📹</a>
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <a href="/" class="brand-logo footer-logo">
+                    <div class="logo-symbol">B</div>
+                    <div class="logo-wordmark">
+                        <span class="logo-main">BEAUTÉ</span>
+                        <span class="logo-tagline">косметика & уход</span>
+                    </div>
+                </a>
+                <p class="footer-description">
+                    Ваш проводник в мир премиальной косметики.<br>
+                    Качество, забота, красота.
+                </p>
+            </div>
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h4>Каталог</h4>
+                    <ul>
+                        <li><a href="#">Макияж</a></li>
+                        <li><a href="#">Уход за лицом</a></li>
+                        <li><a href="#">Уход за телом</a></li>
+                        <li><a href="#">Уход за волосами</a></li>
+                        <li><a href="#">Наборы</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Услуги</h4>
+                    <ul>
+                        <li><a href="#">Консультации</a></li>
+                        <li><a href="#">Визаж</a></li>
+                        <li><a href="#">Beauty Box</a></li>
+                        <li><a href="#">Сертификаты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Компания</h4>
+                    <ul>
+                        <li><a href="#">О нас</a></li>
+                        <li><a href="#">Блог</a></li>
+                        <li><a href="#">Контакты</a></li>
+                        <li><a href="#">Вакансии</a></li>
+                        <li><a href="#">Партнёрам</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Помощь</h4>
+                    <ul>
+                        <li><a href="#">Доставка и оплата</a></li>
+                        <li><a href="#">Возврат</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Политика конфиденциальности</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-        <div class="footer-col">
-            <h4>Каталог</h4>
-            <a href="#">💄 Макияж</a>
-            <a href="#">🧴 Уход за лицом</a>
-            <a href="#">🚿 Уход за телом</a>
-            <a href="#">💇 Уход за волосами</a>
-            <a href="#">🎁 Наборы</a>
-        </div>
-        <div class="footer-col">
-            <h4>Информация</h4>
-            <a href="#about">О нас</a>
-            <a href="#services">Услуги</a>
-            <a href="#">Доставка</a>
-            <a href="#">Возврат</a>
-            <a href="#">FAQ</a>
-        </div>
-        <div class="footer-col">
-            <h4>Контакты</h4>
-            <p>📞 +7 (999) 123-45-67</p>
-            <p>✉️ hello@glow.shop</p>
-            <p>📍 Москва, ул. Красоты, 15</p>
-            <p>🕐 Ежедневно 9:00–21:00</p>
-        </div>
-    </div>
-    <div class="footer-bottom container">
-        <p>© 2025 GLOW. Все права защищены.</p>
-        <div class="footer-bottom-links">
-            <a href="#">Политика конфиденциальности</a>
-            <a href="#">Публичная оферта</a>
+        <div class="footer-bottom">
+            <div class="footer-payment">
+                <span class="payment-label">Принимаем к оплате:</span>
+                <div class="payment-icons">
+                    <span class="payment-icon">💳</span>
+                    <span class="payment-icon">🏦</span>
+                    <span class="payment-icon">📱</span>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                © 2015-2025 BEAUTÉ. Все права защищены.
+            </div>
         </div>
     </div>
 </footer>
 
-<script>
-// Theme Toggle
-const themeToggle = document.getElementById('themeToggle');
-const themeIcon = document.getElementById('themeIcon');
-const html = document.documentElement;
-
-themeToggle.addEventListener('click', () => {
-    const isDark = html.getAttribute('data-theme') === 'dark';
-    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
-    themeIcon.textContent = isDark ? '🌙' : '☀️';
-});
-
-// Accessibility
-document.getElementById('accessibilityBtn').addEventListener('click', () => {
-    document.getElementById('accessibilityBar').style.display = 'block';
-});
-
-function changeFont(delta) {
-    const current = parseInt(getComputedStyle(document.body).fontSize);
-    document.body.style.fontSize = (current + delta) + 'px';
-}
-
-function toggleContrast() {
-    document.body.classList.toggle('high-contrast');
-}
-
-// Slider
-const sliderTrack = document.querySelector('.slider-track');
-const sliderDots = document.querySelectorAll('.slider-dot');
-const sliderPrev = document.querySelector('.slider-prev');
-const sliderNext = document.querySelector('.slider-next');
-let currentSlide = 0;
-const totalSlides = 3;
-
-function updateSlider() {
-    sliderTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
-    sliderDots.forEach((dot, i) => {
-        dot.classList.toggle('active', i === currentSlide);
-    });
-}
-
-sliderDots.forEach((dot, i) => {
-    dot.addEventListener('click', () => {
-        currentSlide = i;
-        updateSlider();
-    });
-});
-
-sliderPrev.addEventListener('click', () => {
-    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-    updateSlider();
-});
-
-sliderNext.addEventListener('click', () => {
-    currentSlide = (currentSlide + 1) % totalSlides;
-    updateSlider();
-});
-
-// Auto-slide
-setInterval(() => {
-    currentSlide = (currentSlide + 1) % totalSlides;
-    updateSlider();
-}, 5000);
-
-// Smooth scroll for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
-        }
-    });
-});
-</script>
-
+<script src="assets/js/main.js"></script>
 </body>
 </html>
