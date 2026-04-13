@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLOW Cosmetics - Оформление заказа</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;600;700&family=DM+Sans:opsz,wght@9..40,300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .checkout-page { padding-top: 100px; min-height: 100vh; }
+        .checkout-container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; }
+        
+        .checkout-section { background: var(--card-bg); border-radius: 20px; padding: 30px; margin-bottom: 30px; border: 1px solid var(--border-color); }
+        .section-title { font-family: 'Unbounded', sans-serif; font-size: 1.5rem; margin-bottom: 25px; color: var(--text-primary); display: flex; align-items: center; gap: 10px; }
+        .section-number { width: 30px; height: 30px; background: var(--accent-pink); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: 700; }
+        
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group.full-width { grid-column: 1 / -1; }
+        .form-label { display: block; margin-bottom: 8px; color: var(--text-secondary); font-size: 0.9rem; }
+        .form-input { width: 100%; padding: 15px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 12px; color: var(--text-primary); font-size: 1rem; transition: all 0.3s ease; }
+        .form-input:focus { outline: none; border-color: var(--accent-pink); box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.1); }
+        select.form-input { cursor: pointer; }
+        
+        .delivery-options { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        .delivery-option { padding: 20px; background: var(--bg-secondary); border: 2px solid var(--border-color); border-radius: 15px; cursor: pointer; transition: all 0.3s ease; }
+        .delivery-option:hover { border-color: var(--accent-pink); }
+        .delivery-option.active { border-color: var(--accent-pink); background: rgba(255, 107, 157, 0.05); }
+        .delivery-icon { font-size: 2rem; margin-bottom: 10px; }
+        .delivery-name { font-weight: 600; color: var(--text-primary); margin-bottom: 5px; }
+        .delivery-price { color: var(--accent-pink); font-weight: 600; }
+        
+        .payment-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+        .payment-option { padding: 20px; background: var(--bg-secondary); border: 2px solid var(--border-color); border-radius: 15px; cursor: pointer; text-align: center; transition: all 0.3s ease; }
+        .payment-option:hover { border-color: var(--accent-pink); }
+        .payment-option.active { border-color: var(--accent-pink); background: rgba(255, 107, 157, 0.05); }
+        .payment-icon { font-size: 2rem; margin-bottom: 10px; }
+        .payment-name { font-weight: 600; color: var(--text-primary); }
+        
+        .order-summary { background: var(--card-bg); border-radius: 20px; padding: 30px; border: 1px solid var(--border-color); position: sticky; top: 120px; height: fit-content; }
+        .summary-items { margin-bottom: 25px; max-height: 300px; overflow-y: auto; }
+        .summary-item { display: flex; gap: 15px; padding: 15px 0; border-bottom: 1px solid var(--border-color); }
+        .summary-item:last-child { border-bottom: none; }
+        .summary-image { width: 60px; height: 60px; border-radius: 10px; object-fit: cover; }
+        .summary-details { flex: 1; }
+        .summary-title { font-weight: 600; color: var(--text-primary); margin-bottom: 5px; font-size: 0.9rem; }
+        .summary-qty { color: var(--text-secondary); font-size: 0.85rem; }
+        .summary-price { color: var(--accent-pink); font-weight: 600; }
+        
+        .summary-row { display: flex; justify-content: space-between; margin-bottom: 15px; color: var(--text-secondary); }
+        .summary-row.total { color: var(--text-primary); font-weight: 700; font-size: 1.3rem; border-top: 2px solid var(--border-color); padding-top: 20px; margin-top: 20px; }
+        .promo-code { display: flex; gap: 10px; margin-bottom: 25px; }
+        .promo-input { flex: 1; padding: 12px 15px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 12px; color: var(--text-primary); }
+        .btn-apply { padding: 12px 20px; }
+        
+        .btn-checkout { width: 100%; padding: 18px; font-size: 1.1rem; font-weight: 600; margin-top: 20px; }
+        
+        .gift-options { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-color); }
+        .checkbox-group { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; cursor: pointer; }
+        .custom-checkbox { width: 20px; height: 20px; border: 2px solid var(--border-color); border-radius: 5px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
+        .checkbox-group input { display: none; }
+        .checkbox-group input:checked + .custom-checkbox { background: var(--accent-pink); border-color: var(--accent-pink); }
+        .checkbox-group input:checked + .custom-checkbox::after { content: '✓'; color: white; font-size: 14px; }
+        
+        @media (max-width: 968px) {
+            .checkout-container { grid-template-columns: 1fr; }
+            .order-summary { position: static; }
+            .form-grid, .delivery-options, .payment-options { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <a href="index.html" class="logo">GLOW</a>
+            <nav class="nav-menu">
+                <a href="index.html">Главная</a>
+                <a href="catalog.html">Каталог</a>
+                <a href="services.html">Услуги</a>
+                <a href="blog.html">Блог</a>
+                <a href="about.html">О нас</a>
+                <a href="contacts.html">Контакты</a>
+            </nav>
+            <div class="header-actions">
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+                <button class="accessibility-toggle" id="accessibilityToggle">👁️</button>
+                <a href="wishlist.html" class="header-icon">❤️</a>
+                <a href="cart.html" class="header-icon cart-icon">🛒<span class="cart-count">0</span></a>
+                <a href="profile.html" class="header-icon">👤</a>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="checkout-page">
+        <div class="checkout-container">
+            <div class="checkout-form">
+                <div class="checkout-section">
+                    <h2 class="section-title"><span class="section-number">1</span> Контактная информация</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Email *</label>
+                            <input type="email" class="form-input" placeholder="your@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Телефон *</label>
+                            <input type="tel" class="form-input" placeholder="+7 (999) 000-00-00" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checkout-section">
+                    <h2 class="section-title"><span class="section-number">2</span> Адрес доставки</h2>
+                    <div class="form-grid">
+                        <div class="form-group full-width">
+                            <label class="form-label">Город *</label>
+                            <input type="text" class="form-input" placeholder="Москва" required>
+                        </div>
+                        <div class="form-group full-width">
+                            <label class="form-label">Улица, дом, квартира *</label>
+                            <input type="text" class="form-input" placeholder="ул. Примерная, д. 1, кв. 1" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Индекс *</label>
+                            <input type="text" class="form-input" placeholder="101000" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Регион</label>
+                            <input type="text" class="form-input" placeholder="Московская область">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checkout-section">
+                    <h2 class="section-title"><span class="section-number">3</span> Способ доставки</h2>
+                    <div class="delivery-options">
+                        <div class="delivery-option active" onclick="selectDelivery(this, 0)">
+                            <div class="delivery-icon">🏪</div>
+                            <div class="delivery-name">Самовывоз из магазина</div>
+                            <div class="delivery-price">Бесплатно</div>
+                        </div>
+                        <div class="delivery-option" onclick="selectDelivery(this, 300)">
+                            <div class="delivery-icon">🚚</div>
+                            <div class="delivery-name">Курьерская доставка</div>
+                            <div class="delivery-price">300 ₽</div>
+                        </div>
+                        <div class="delivery-option" onclick="selectDelivery(this, 200)">
+                            <div class="delivery-icon">📦</div>
+                            <div class="delivery-name">Пункт выдачи</div>
+                            <div class="delivery-price">200 ₽</div>
+                        </div>
+                        <div class="delivery-option" onclick="selectDelivery(this, 500)">
+                            <div class="delivery-icon">✈️</div>
+                            <div class="delivery-name">Экспресс доставка</div>
+                            <div class="delivery-price">500 ₽</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checkout-section">
+                    <h2 class="section-title"><span class="section-number">4</span> Способ оплаты</h2>
+                    <div class="payment-options">
+                        <div class="payment-option active" onclick="selectPayment(this)">
+                            <div class="payment-icon">💳</div>
+                            <div class="payment-name">Картой онлайн</div>
+                        </div>
+                        <div class="payment-option" onclick="selectPayment(this)">
+                            <div class="payment-icon">💵</div>
+                            <div class="payment-name">При получении</div>
+                        </div>
+                        <div class="payment-option" onclick="selectPayment(this)">
+                            <div class="payment-icon">📱</div>
+                            <div class="payment-name">SBP</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checkout-section">
+                    <h2 class="section-title"><span class="section-number">5</span> Дополнительные опции</h2>
+                    <label class="checkbox-group">
+                        <input type="checkbox" id="giftWrap">
+                        <div class="custom-checkbox"></div>
+                        <span>Подарочная упаковка (+150 ₽)</span>
+                    </label>
+                    <label class="checkbox-group">
+                        <input type="checkbox" id="noReceipt">
+                        <div class="custom-checkbox"></div>
+                        <span>Не нужен чек</span>
+                    </label>
+                    <div class="form-group" style="margin-top: 20px;">
+                        <label class="form-label">Комментарий к заказу</label>
+                        <textarea class="form-input" rows="3" placeholder="Ваши пожелания..."></textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="order-summary">
+                <h2 class="section-title">Ваш заказ</h2>
+                <div class="summary-items" id="summaryItems">
+                    <!-- Товары добавятся через JS -->
+                </div>
+                
+                <div class="promo-code">
+                    <input type="text" class="promo-input" placeholder="Промокод" id="promoInput">
+                    <button class="btn btn-apply" onclick="applyPromo()">Применить</button>
+                </div>
+                
+                <div class="summary-row">
+                    <span>Подытог</span>
+                    <span id="subtotal">0 ₽</span>
+                </div>
+                <div class="summary-row">
+                    <span>Доставка</span>
+                    <span id="deliveryCost">0 ₽</span>
+                </div>
+                <div class="summary-row">
+                    <span>Упаковка</span>
+                    <span id="wrapCost">0 ₽</span>
+                </div>
+                <div class="summary-row">
+                    <span>Скидка</span>
+                    <span id="discount">0 ₽</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Итого</span>
+                    <span id="total">0 ₽</span>
+                </div>
+                
+                <button class="btn btn-checkout" onclick="placeOrder()">Оформить заказ</button>
+                
+                <p style="text-align: center; color: var(--text-secondary); font-size: 0.85rem; margin-top: 15px;">
+                    Нажимая кнопку, вы соглашаетесь с условиями оферты
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>GLOW</h3>
+                    <p>Премиум косметика для вашей красоты</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Навигация</h4>
+                    <a href="catalog.html">Каталог</a>
+                    <a href="services.html">Услуги</a>
+                    <a href="blog.html">Блог</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Поддержка</h4>
+                    <a href="faq.html">FAQ</a>
+                    <a href="contacts.html">Контакты</a>
+                    <a href="policy.html">Политика конфиденциальности</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Мы в соцсетях</h4>
+                    <div class="social-links">
+                        <a href="#">Instagram</a>
+                        <a href="#">Telegram</a>
+                        <a href="#">VK</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 GLOW Cosmetics. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        let deliveryPrice = 0;
+        let wrapPrice = 0;
+        let discountValue = 0;
+        
+        function selectDelivery(element, price) {
+            document.querySelectorAll('.delivery-option').forEach(opt => opt.classList.remove('active'));
+            element.classList.add('active');
+            deliveryPrice = price;
+            updateSummary();
+        }
+        
+        function selectPayment(element) {
+            document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('active'));
+            element.classList.add('active');
+        }
+        
+        function loadCartItems() {
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const container = document.getElementById('summaryItems');
+            container.innerHTML = '';
+            
+            if (cart.length === 0) {
+                container.innerHTML = '<p style="color: var(--text-secondary); text-align: center;">Корзина пуста</p>';
+                return;
+            }
+            
+            cart.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'summary-item';
+                div.innerHTML = `
+                    <img src="${item.image}" alt="${item.title}" class="summary-image">
+                    <div class="summary-details">
+                        <div class="summary-title">${item.title}</div>
+                        <div class="summary-qty">${item.quantity} шт.</div>
+                    </div>
+                    <div class="summary-price">${(item.price * item.quantity).toLocaleString()} ₽</div>
+                `;
+                container.appendChild(div);
+            });
+        }
+        
+        function updateSummary() {
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            wrapPrice = document.getElementById('giftWrap').checked ? 150 : 0;
+            
+            document.getElementById('subtotal').textContent = `${subtotal.toLocaleString()} ₽`;
+            document.getElementById('deliveryCost').textContent = `${deliveryPrice.toLocaleString()} ₽`;
+            document.getElementById('wrapCost').textContent = `${wrapPrice.toLocaleString()} ₽`;
+            document.getElementById('discount').textContent = `-${discountValue.toLocaleString()} ₽`;
+            
+            const total = subtotal + deliveryPrice + wrapPrice - discountValue;
+            document.getElementById('total').textContent = `${total.toLocaleString()} ₽`;
+        }
+        
+        function applyPromo() {
+            const code = document.getElementById('promoInput').value.trim().toUpperCase();
+            if (code === 'GLOW10') {
+                discountValue = 0.1 * (parseFloat(document.getElementById('subtotal').textContent) || 0);
+                showNotification('Промокод применен! Скидка 10%', 'success');
+                updateSummary();
+            } else if (code === 'WELCOME') {
+                discountValue = 500;
+                showNotification('Промокод применен! Скидка 500₽', 'success');
+                updateSummary();
+            } else {
+                showNotification('Неверный промокод', 'error');
+            }
+        }
+        
+        function placeOrder() {
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            if (cart.length === 0) {
+                showNotification('Корзина пуста!', 'error');
+                return;
+            }
+            
+            // Сохраняем заказ
+            const order = {
+                id: Date.now(),
+                date: new Date().toISOString(),
+                items: cart,
+                total: document.getElementById('total').textContent,
+                status: 'processing'
+            };
+            
+            const orders = JSON.parse(localStorage.getItem('orders') || '[]');
+            orders.push(order);
+            localStorage.setItem('orders', JSON.stringify(orders));
+            localStorage.removeItem('cart');
+            
+            window.location.href = 'order-success.html?orderId=' + order.id;
+        }
+        
+        document.getElementById('giftWrap').addEventListener('change', updateSummary);
+        
+        loadCartItems();
+        updateSummary();
+        updateCartCount();
+    </script>
+</body>
+</html>

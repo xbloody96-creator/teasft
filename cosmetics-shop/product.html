@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLOW Cosmetics - Страница товара</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;500;600;700&family=DM+Sans:opsz,wght@9..40,300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .product-page { padding-top: 100px; }
+        .product-container { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; max-width: 1400px; margin: 0 auto; padding: 40px 20px; }
+        .product-gallery { position: sticky; top: 120px; height: fit-content; }
+        .main-image { width: 100%; aspect-ratio: 1; background: var(--card-bg); border-radius: 20px; overflow: hidden; margin-bottom: 20px; }
+        .main-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .main-image:hover img { transform: scale(1.05); }
+        .thumbnail-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+        .thumbnail { aspect-ratio: 1; background: var(--card-bg); border-radius: 12px; overflow: hidden; cursor: pointer; border: 2px solid transparent; transition: all 0.3s ease; }
+        .thumbnail.active, .thumbnail:hover { border-color: var(--accent-pink); }
+        .thumbnail img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .product-info h1 { font-family: 'Unbounded', sans-serif; font-size: 2.5rem; margin-bottom: 10px; color: var(--text-primary); }
+        .product-meta { display: flex; align-items: center; gap: 20px; margin-bottom: 20px; }
+        .product-rating { display: flex; align-items: center; gap: 8px; color: var(--accent-gold); }
+        .product-price { font-size: 2rem; font-weight: 700; color: var(--accent-pink); margin-bottom: 20px; }
+        .product-description { color: var(--text-secondary); line-height: 1.7; margin-bottom: 30px; }
+        
+        .eco-badges { display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
+        .eco-badge { padding: 8px 16px; background: rgba(100, 255, 100, 0.1); border: 1px solid rgba(100, 255, 100, 0.3); border-radius: 20px; color: #64ff64; font-size: 0.9rem; font-weight: 600; display: flex; align-items: center; gap: 6px; }
+        
+        .product-actions { display: flex; gap: 20px; margin-bottom: 40px; }
+        .quantity-selector { display: flex; align-items: center; background: var(--card-bg); border-radius: 12px; padding: 5px; }
+        .qty-btn { width: 40px; height: 40px; border: none; background: transparent; color: var(--text-primary); font-size: 1.5rem; cursor: pointer; transition: all 0.3s ease; }
+        .qty-btn:hover { color: var(--accent-pink); }
+        .qty-input { width: 60px; text-align: center; background: transparent; border: none; color: var(--text-primary); font-size: 1.1rem; font-weight: 600; }
+        .btn-add-to-cart { flex: 1; padding: 15px 30px; font-size: 1.1rem; }
+        
+        .product-tabs { margin-top: 40px; }
+        .tab-buttons { display: flex; gap: 10px; border-bottom: 2px solid var(--border-color); margin-bottom: 30px; }
+        .tab-btn { padding: 15px 30px; background: transparent; border: none; color: var(--text-secondary); font-family: 'Unbounded', sans-serif; font-size: 1rem; cursor: pointer; position: relative; transition: all 0.3s ease; }
+        .tab-btn.active { color: var(--accent-pink); }
+        .tab-btn.active::after { content: ''; position: absolute; bottom: -2px; left: 0; right: 0; height: 2px; background: var(--accent-pink); }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.5s ease; }
+        
+        .ingredients-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+        .ingredient-item { background: var(--card-bg); padding: 20px; border-radius: 15px; border: 1px solid var(--border-color); }
+        .ingredient-name { font-weight: 600; color: var(--accent-pink); margin-bottom: 8px; }
+        .ingredient-desc { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.5; }
+        
+        .reviews-section { margin-top: 60px; }
+        .review-card { background: var(--card-bg); padding: 30px; border-radius: 20px; margin-bottom: 20px; border: 1px solid var(--border-color); }
+        .review-header { display: flex; justify-content: space-between; margin-bottom: 15px; }
+        .reviewer-name { font-weight: 600; color: var(--text-primary); }
+        .review-date { color: var(--text-secondary); font-size: 0.9rem; }
+        .review-text { color: var(--text-secondary); line-height: 1.6; }
+        
+        @media (max-width: 968px) {
+            .product-container { grid-template-columns: 1fr; gap: 30px; }
+            .product-gallery { position: static; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <a href="index.html" class="logo">GLOW</a>
+            <nav class="nav-menu">
+                <a href="index.html">Главная</a>
+                <a href="catalog.html">Каталог</a>
+                <a href="services.html">Услуги</a>
+                <a href="blog.html">Блог</a>
+                <a href="about.html">О нас</a>
+                <a href="contacts.html">Контакты</a>
+            </nav>
+            <div class="header-actions">
+                <button class="theme-toggle" id="themeToggle">🌙</button>
+                <button class="accessibility-toggle" id="accessibilityToggle">👁️</button>
+                <a href="wishlist.html" class="header-icon">❤️</a>
+                <a href="cart.html" class="header-icon cart-icon">🛒<span class="cart-count">0</span></a>
+                <a href="profile.html" class="header-icon">👤</a>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="product-page">
+        <div class="product-container">
+            <div class="product-gallery">
+                <div class="main-image">
+                    <img id="mainImage" src="images/product1.jpg" alt="Товар">
+                </div>
+                <div class="thumbnail-grid">
+                    <div class="thumbnail active" onclick="changeImage('images/product1.jpg', this)">
+                        <img src="images/product1.jpg" alt="Фото 1">
+                    </div>
+                    <div class="thumbnail" onclick="changeImage('images/product2.jpg', this)">
+                        <img src="images/product2.jpg" alt="Фото 2">
+                    </div>
+                    <div class="thumbnail" onclick="changeImage('images/product3.jpg', this)">
+                        <img src="images/product3.jpg" alt="Фото 3">
+                    </div>
+                    <div class="thumbnail" onclick="changeImage('images/product4.jpg', this)">
+                        <img src="images/product4.jpg" alt="Фото 4">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-info">
+                <h1 id="productTitle">Увлажняющая сыворотка Hydra Boost</h1>
+                <div class="product-meta">
+                    <div class="product-rating">
+                        <span>⭐⭐⭐⭐⭐</span>
+                        <span id="ratingValue">4.9</span>
+                        <span class="text-secondary">(128 отзывов)</span>
+                    </div>
+                    <span class="eco-badge">🌱 Vegan</span>
+                    <span class="eco-badge">🐰 Cruelty Free</span>
+                </div>
+                
+                <div class="product-price" id="productPrice">2 490 ₽</div>
+                
+                <p class="product-description" id="productDescription">
+                    Интенсивно увлажняющая сыворотка с гиалуроновой кислотой и витамином B5. 
+                    Мгновенно насыщает кожу влагой, разглаживает мелкие морщинки и придает сияние. 
+                    Подходит для всех типов кожи, включая чувствительную.
+                </p>
+                
+                <div class="eco-badges">
+                    <span class="eco-badge">🌿 Натуральные ингредиенты</span>
+                    <span class="eco-badge">♻️ Эко-упаковка</span>
+                    <span class="eco-badge">💧 Без парабенов</span>
+                </div>
+                
+                <div class="product-actions">
+                    <div class="quantity-selector">
+                        <button class="qty-btn" onclick="changeQty(-1)">−</button>
+                        <input type="text" class="qty-input" id="qtyInput" value="1" readonly>
+                        <button class="qty-btn" onclick="changeQty(1)">+</button>
+                    </div>
+                    <button class="btn btn-add-to-cart" onclick="addToCart()">
+                        Добавить в корзину
+                    </button>
+                    <button class="btn btn-outline" onclick="addToWishlist()">
+                        ❤️
+                    </button>
+                </div>
+                
+                <div class="product-tabs">
+                    <div class="tab-buttons">
+                        <button class="tab-btn active" onclick="switchTab('description')">Описание</button>
+                        <button class="tab-btn" onclick="switchTab('ingredients')">Состав</button>
+                        <button class="tab-btn" onclick="switchTab('reviews')">Отзывы</button>
+                    </div>
+                    
+                    <div id="description" class="tab-content active">
+                        <h3>Подробное описание</h3>
+                        <p style="color: var(--text-secondary); line-height: 1.7;">
+                            Наша увлажняющая сыворотка Hydra Boost создана для глубокого увлажнения и восстановления кожи. 
+                            Формула содержит три вида гиалуроновой кислоты разного молекулярного веса, что обеспечивает 
+                            увлажнение на всех уровнях эпидермиса.
+                        </p>
+                        <ul style="color: var(--text-secondary); line-height: 2; margin-top: 20px;">
+                            <li>✅ Мгновенное увлажнение на 72 часа</li>
+                            <li>✅ Разглаживание мелких морщинок</li>
+                            <li>✅ Улучшение текстуры кожи</li>
+                            <li>✅ Придание здорового сияния</li>
+                        </ul>
+                    </div>
+                    
+                    <div id="ingredients" class="tab-content">
+                        <h3>Разбор состава</h3>
+                        <div class="ingredients-list">
+                            <div class="ingredient-item">
+                                <div class="ingredient-name">Гиалуроновая кислота</div>
+                                <div class="ingredient-desc">Интенсивно увлажняет, удерживает влагу в коже, разглаживает морщины</div>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-name">Витамин B5 (Пантенол)</div>
+                                <div class="ingredient-desc">Восстанавливает, успокаивает раздраженную кожу, заживляет</div>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-name">Ниацинамид</div>
+                                <div class="ingredient-desc">Выравнивает тон, сужает поры, контролирует жирность</div>
+                            </div>
+                            <div class="ingredient-item">
+                                <div class="ingredient-name">Алоэ Вера</div>
+                                <div class="ingredient-desc">Успокаивает, снимает покраснения, охлаждает кожу</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="reviews" class="tab-content">
+                        <div class="reviews-section">
+                            <div class="review-card">
+                                <div class="review-header">
+                                    <div>
+                                        <div class="reviewer-name">Анна К.</div>
+                                        <div class="product-rating">⭐⭐⭐⭐⭐</div>
+                                    </div>
+                                    <div class="review-date">15 марта 2024</div>
+                                </div>
+                                <p class="review-text">
+                                    Потрясающая сыворотка! Кожа стала невероятно мягкой и увлажненной. 
+                                    Использую уже месяц, результат заметен сразу после нанесения.
+                                </p>
+                            </div>
+                            <div class="review-card">
+                                <div class="review-header">
+                                    <div>
+                                        <div class="reviewer-name">Мария С.</div>
+                                        <div class="product-rating">⭐⭐⭐⭐⭐</div>
+                                    </div>
+                                    <div class="review-date">10 марта 2024</div>
+                                </div>
+                                <p class="review-text">
+                                    Лучшая сыворотка из всех, что я пробовала. Не липкая, быстро впитывается, 
+                                    идеально подходит под макияж. Рекомендую!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>GLOW</h3>
+                    <p>Премиум косметика для вашей красоты</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Навигация</h4>
+                    <a href="catalog.html">Каталог</a>
+                    <a href="services.html">Услуги</a>
+                    <a href="blog.html">Блог</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Поддержка</h4>
+                    <a href="faq.html">FAQ</a>
+                    <a href="contacts.html">Контакты</a>
+                    <a href="policy.html">Политика конфиденциальности</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Мы в соцсетях</h4>
+                    <div class="social-links">
+                        <a href="#">Instagram</a>
+                        <a href="#">Telegram</a>
+                        <a href="#">VK</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 GLOW Cosmetics. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        function changeImage(src, thumbnail) {
+            document.getElementById('mainImage').src = src;
+            document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+            thumbnail.classList.add('active');
+        }
+        
+        function changeQty(delta) {
+            const input = document.getElementById('qtyInput');
+            let value = parseInt(input.value) + delta;
+            if (value < 1) value = 1;
+            input.value = value;
+        }
+        
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+        
+        function addToCart() {
+            const qty = parseInt(document.getElementById('qtyInput').value);
+            const product = {
+                id: 1,
+                title: document.getElementById('productTitle').innerText,
+                price: 2490,
+                image: document.getElementById('mainImage').src,
+                quantity: qty
+            };
+            
+            let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const existing = cart.find(item => item.id === product.id);
+            if (existing) {
+                existing.quantity += qty;
+            } else {
+                cart.push(product);
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            showNotification('Товар добавлен в корзину!', 'success');
+        }
+        
+        function addToWishlist() {
+            showNotification('Добавлено в избранное!', 'success');
+        }
+        
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.querySelector('.cart-count').textContent = count;
+        }
+        
+        updateCartCount();
+    </script>
+</body>
+</html>

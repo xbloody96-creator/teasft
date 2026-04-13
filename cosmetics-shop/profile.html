@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLOW Cosmetics - Профиль</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600;700&family=Unbounded:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-content">
+            <a href="index.html" class="logo">GLOW</a>
+            
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Главная</a></li>
+                    <li><a href="catalog.html" class="nav-link">Каталог</a></li>
+                    <li><a href="services.html" class="nav-link">Услуги</a></li>
+                    <li><a href="about.html" class="nav-link">О нас</a></li>
+                    <li><a href="contacts.html" class="nav-link">Контакты</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <button class="icon-btn" id="theme-toggle" title="Переключить тему">🌓</button>
+                <a href="profile.html" class="icon-btn login-trigger" title="Профиль">👤</a>
+                <button class="icon-btn" id="cart-toggle" title="Корзина">
+                    🛒
+                    <span class="cart-count">0</span>
+                </button>
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Accessibility Panel -->
+    <div class="accessibility-panel">
+        <div class="accessibility-toggle">♿</div>
+        <div class="accessibility-option">
+            <input type="checkbox" id="font-size-large">
+            <label for="font-size-large">Крупный шрифт</label>
+        </div>
+        <div class="accessibility-option">
+            <input type="checkbox" id="high-contrast">
+            <label for="high-contrast">Высокий контраст</label>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Личный кабинет</h1>
+            <div class="breadcrumb">
+                <a href="index.html">Главная</a>
+                <span>/</span>
+                <span>Профиль</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Profile Content -->
+    <section class="profile-container">
+        <div class="container profile-grid">
+            <!-- Sidebar -->
+            <aside class="profile-sidebar">
+                <div class="profile-avatar" id="profile-avatar">👤</div>
+                <h3 style="text-align: center; margin-bottom: 2rem;" id="profile-name">Гость</h3>
+                <ul class="profile-nav">
+                    <li><a href="#" class="active" onclick="switchProfileSection('profile-info'); return false;">📋 Личные данные</a></li>
+                    <li><a href="#" onclick="switchProfileSection('profile-orders'); return false;">📦 Мои заказы</a></li>
+                    <li><a href="#" onclick="switchProfileSection('profile-wishlist'); return false;">❤️ Избранное</a></li>
+                    <li><a href="#" onclick="switchProfileSection('profile-settings'); return false;">⚙️ Настройки</a></li>
+                    <li><a href="#" onclick="logout(); return false;">🚪 Выйти</a></li>
+                </ul>
+            </aside>
+
+            <!-- Content -->
+            <main class="profile-content">
+                <!-- Personal Info -->
+                <div id="profile-info" class="profile-section active">
+                    <h2 style="margin-bottom: 1.5rem;">Личные данные</h2>
+                    <form id="profile-form">
+                        <div class="form-group">
+                            <label for="profile-email">Email</label>
+                            <input type="email" id="profile-email" placeholder="your@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-phone">Телефон</label>
+                            <input type="tel" id="profile-phone" placeholder="+7 (___) ___-__-__">
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-name-input">Имя</label>
+                            <input type="text" id="profile-name-input" placeholder="Ваше имя">
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-surname">Фамилия</label>
+                            <input type="text" id="profile-surname" placeholder="Ваша фамилия">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+                    </form>
+                </div>
+
+                <!-- Orders -->
+                <div id="profile-orders" class="profile-section">
+                    <h2 style="margin-bottom: 1.5rem;">Мои заказы</h2>
+                    <div id="orders-list">
+                        <p style="color: var(--text-secondary); text-align: center; padding: 2rem;">У вас пока нет заказов</p>
+                    </div>
+                </div>
+
+                <!-- Wishlist -->
+                <div id="profile-wishlist" class="profile-section">
+                    <h2 style="margin-bottom: 1.5rem;">Избранное</h2>
+                    <div class="products-grid" id="wishlist-items">
+                        <p style="color: var(--text-secondary); grid-column: 1/-1; text-align: center; padding: 2rem;">Список избранного пуст</p>
+                    </div>
+                </div>
+
+                <!-- Settings -->
+                <div id="profile-settings" class="profile-section">
+                    <h2 style="margin-bottom: 1.5rem;">Настройки</h2>
+                    <div class="form-group">
+                        <label for="current-password">Текущий пароль</label>
+                        <input type="password" id="current-password" placeholder="••••••••">
+                    </div>
+                    <div class="form-group">
+                        <label for="new-password">Новый пароль</label>
+                        <input type="password" id="new-password" placeholder="••••••••">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Подтвердите пароль</label>
+                        <input type="password" id="confirm-password" placeholder="••••••••">
+                    </div>
+                    <button class="btn btn-primary" onclick="showNotification('Пароль изменён!', 'success')">Изменить пароль</button>
+                    
+                    <h3 style="margin: 2rem 0 1rem;">Уведомления</h3>
+                    <div class="form-group">
+                        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                            <input type="checkbox" checked> Email уведомления о заказах
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                            <input type="checkbox" checked> SMS уведомления о доставке
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                            <input type="checkbox"> Рассылка о новинках и акциях
+                        </label>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-logo">GLOW</div>
+                    <p class="footer-desc">Твой проводник в мир премиальной косметики и красоты.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">📱</a>
+                        <a href="#" class="social-link">📷</a>
+                        <a href="#" class="social-link">🎬</a>
+                        <a href="#" class="social-link">💬</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer-title">Категории</h4>
+                    <ul class="footer-links">
+                        <li><a href="catalog.html?category=skincare">Уход за кожей</a></li>
+                        <li><a href="catalog.html?category=makeup">Макияж</a></li>
+                        <li><a href="catalog.html?category=hair">Уход за волосами</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">Компания</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">О нас</a></li>
+                        <li><a href="services.html">Услуги</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">Контакты</h4>
+                    <ul class="footer-links">
+                        <li>📍 Москва, ул. Красоты, 1</li>
+                        <li>📞 +7 (999) 000-00-00</li>
+                        <li>✉️ hello@glowcosmetics.ru</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 GLOW Cosmetics. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Вход в аккаунт</h3>
+                <button class="modal-close">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" required placeholder="your@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Пароль</label>
+                        <input type="password" id="login-password" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Войти</button>
+                    <p style="text-align: center; margin-top: 1rem; color: var(--text-secondary);">
+                        Нет аккаунта? <a href="#" style="color: var(--primary);" onclick="showRegisterForm(); return false;">Зарегистрироваться</a>
+                    </p>
+                </form>
+                <form id="register-form" style="display: none; margin-top: 1.5rem;">
+                    <div class="form-group">
+                        <label for="register-name">Имя</label>
+                        <input type="text" id="register-name" required placeholder="Ваше имя">
+                    </div>
+                    <div class="form-group">
+                        <label for="register-email">Email</label>
+                        <input type="email" id="register-email" required placeholder="your@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password">Пароль</label>
+                        <input type="password" id="register-password" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Зарегистрироваться</button>
+                    <p style="text-align: center; margin-top: 1rem; color: var(--text-secondary);">
+                        Уже есть аккаунт? <a href="#" style="color: var(--primary);" onclick="showLoginForm(); return false;">Войти</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay"></div>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Check if user is logged in
+        function checkAuth() {
+            const user = JSON.parse(localStorage.getItem('user'));
+            if (user) {
+                document.getElementById('profile-name').textContent = user.name || user.email;
+                document.getElementById('profile-email').value = user.email || '';
+                document.getElementById('profile-avatar').textContent = (user.name || '?')[0].toUpperCase();
+            } else {
+                document.getElementById('login-modal').classList.add('active');
+                document.querySelector('.overlay').classList.add('active');
+            }
+        }
+
+        function showRegisterForm() {
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('register-form').style.display = 'block';
+        }
+
+        function showLoginForm() {
+            document.getElementById('register-form').style.display = 'none';
+            document.getElementById('login-form').style.display = 'block';
+        }
+
+        function logout() {
+            localStorage.removeItem('user');
+            showNotification('Вы вышли из аккаунта', 'success');
+            setTimeout(() => window.location.href = 'index.html', 1000);
+        }
+
+        document.addEventListener('DOMContentLoaded', checkAuth);
+    </script>
+</body>
+</html>

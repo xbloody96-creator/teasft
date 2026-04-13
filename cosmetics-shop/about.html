@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLOW Cosmetics - О нас</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600;700&family=Unbounded:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-content">
+            <a href="index.html" class="logo">GLOW</a>
+            
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Главная</a></li>
+                    <li><a href="catalog.html" class="nav-link">Каталог</a></li>
+                    <li><a href="services.html" class="nav-link">Услуги</a></li>
+                    <li><a href="about.html" class="nav-link active">О нас</a></li>
+                    <li><a href="contacts.html" class="nav-link">Контакты</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <button class="icon-btn" id="theme-toggle" title="Переключить тему">🌓</button>
+                <a href="profile.html" class="icon-btn login-trigger" title="Профиль">👤</a>
+                <button class="icon-btn" id="cart-toggle" title="Корзина">
+                    🛒
+                    <span class="cart-count">0</span>
+                </button>
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Accessibility Panel -->
+    <div class="accessibility-panel">
+        <div class="accessibility-toggle">♿</div>
+        <div class="accessibility-option">
+            <input type="checkbox" id="font-size-large">
+            <label for="font-size-large">Крупный шрифт</label>
+        </div>
+        <div class="accessibility-option">
+            <input type="checkbox" id="high-contrast">
+            <label for="high-contrast">Высокий контраст</label>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">О компании GLOW</h1>
+            <div class="breadcrumb">
+                <a href="index.html">Главная</a>
+                <span>/</span>
+                <span>О нас</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Content -->
+    <section style="padding: 50px 0;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-bottom: 5rem;">
+                <div>
+                    <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Наша история</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">GLOW Cosmetics была основана в 2020 году с простой миссией — сделать премиальную косметику доступной для каждого.</p>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">Мы верим, что красота не должна быть сложной. Наши продукты созданы для того, чтобы подчеркнуть вашу естественную красоту, а не скрыть её.</p>
+                    <p style="color: var(--text-secondary);">Сегодня GLOW — это более 500 продуктов, 10 магазинов по всей России и тысячи довольных клиентов.</p>
+                </div>
+                <div>
+                    <img src="https://placehold.co/600x400/1a1a25/ff0080?text=Our+Story" alt="Наша история" style="width: 100%; border-radius: 20px; box-shadow: var(--glow-primary);">
+                </div>
+            </div>
+
+            <!-- Values -->
+            <div style="margin-bottom: 5rem;">
+                <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 3rem;">Наши ценности</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                    <div style="text-align: center; padding: 2rem; background: var(--bg-card); border-radius: 20px;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🌿</div>
+                        <h3 style="margin-bottom: 0.5rem;">Натуральность</h3>
+                        <p style="color: var(--text-secondary);">Используем только натуральные ингредиенты безопасные для кожи</p>
+                    </div>
+                    <div style="text-align: center; padding: 2rem; background: var(--bg-card); border-radius: 20px;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🐰</div>
+                        <h3 style="margin-bottom: 0.5rem;">Cruelty Free</h3>
+                        <p style="color: var(--text-secondary);">Не тестируем продукцию на животных</p>
+                    </div>
+                    <div style="text-align: center; padding: 2rem; background: var(--bg-card); border-radius: 20px;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">♻️</div>
+                        <h3 style="margin-bottom: 0.5rem;">Экологичность</h3>
+                        <p style="color: var(--text-secondary);">Перерабатываемая упаковка и устойчивое производство</p>
+                    </div>
+                    <div style="text-align: center; padding: 2rem; background: var(--bg-card); border-radius: 20px;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">💝</div>
+                        <h3 style="margin-bottom: 0.5rem;">Инклюзивность</h3>
+                        <p style="color: var(--text-secondary);">Продукты для всех типов кожи и оттенков</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div style="background: var(--bg-card); border-radius: 20px; padding: 3rem; margin-bottom: 5rem;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; text-align: center;">
+                    <div>
+                        <div style="font-size: 3rem; font-weight: 800; background: var(--gradient-main); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">500+</div>
+                        <p style="color: var(--text-secondary);">Товаров в каталоге</p>
+                    </div>
+                    <div>
+                        <div style="font-size: 3rem; font-weight: 800; background: var(--gradient-main); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">10</div>
+                        <p style="color: var(--text-secondary);">Магазинов</p>
+                    </div>
+                    <div>
+                        <div style="font-size: 3rem; font-weight: 800; background: var(--gradient-main); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">50K+</div>
+                        <p style="color: var(--text-secondary);">Довольных клиентов</p>
+                    </div>
+                    <div>
+                        <div style="font-size: 3rem; font-weight: 800; background: var(--gradient-main); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">4 года</h>
+                        <p style="color: var(--text-secondary);">На рынке</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team -->
+            <div>
+                <h2 style="text-align: center; font-size: 2.5rem; margin-bottom: 3rem;">Команда GLOW</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+                    <div style="text-align: center;">
+                        <img src="https://placehold.co/300x300/1a1a25/ff0080?text=CEO" alt="CEO" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; margin-bottom: 1rem; border: 3px solid var(--primary);">
+                        <h3>Анна Петрова</h3>
+                        <p style="color: var(--primary);">Основатель и CEO</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <img src="https://placehold.co/300x300/1a1a25/ff0080?text=CMO" alt="CMO" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; margin-bottom: 1rem; border: 3px solid var(--primary);">
+                        <h3>Мария Иванова</h3>
+                        <p style="color: var(--primary);">Главный визажист</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <img src="https://placehold.co/300x300/1a1a25/ff0080?text=CTO" alt="CTO" style="width: 200px; height: 200px; border-radius: 50%; object-fit: cover; margin-bottom: 1rem; border: 3px solid var(--primary);">
+                        <h3>Елена Смирнова</h3>
+                        <p style="color: var(--primary);">Дерматолог</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-logo">GLOW</div>
+                    <p class="footer-desc">Твой проводник в мир премиальной косметики и красоты.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">📱</a>
+                        <a href="#" class="social-link">📷</a>
+                        <a href="#" class="social-link">🎬</a>
+                        <a href="#" class="social-link">💬</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer-title">Категории</h4>
+                    <ul class="footer-links">
+                        <li><a href="catalog.html?category=skincare">Уход за кожей</a></li>
+                        <li><a href="catalog.html?category=makeup">Макияж</a></li>
+                        <li><a href="catalog.html?category=hair">Уход за волосами</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">Компания</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">О нас</a></li>
+                        <li><a href="services.html">Услуги</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">Контакты</h4>
+                    <ul class="footer-links">
+                        <li>📍 Москва, ул. Красоты, 1</li>
+                        <li>📞 +7 (999) 000-00-00</li>
+                        <li>✉️ hello@glowcosmetics.ru</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 GLOW Cosmetics. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Overlay -->
+    <div class="overlay"></div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

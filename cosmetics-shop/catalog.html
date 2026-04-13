@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLOW Cosmetics - Каталог</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600;700&family=Unbounded:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-content">
+            <a href="index.html" class="logo">GLOW</a>
+            
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Главная</a></li>
+                    <li><a href="catalog.html" class="nav-link active">Каталог</a></li>
+                    <li><a href="services.html" class="nav-link">Услуги</a></li>
+                    <li><a href="about.html" class="nav-link">О нас</a></li>
+                    <li><a href="contacts.html" class="nav-link">Контакты</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <button class="icon-btn" id="theme-toggle" title="Переключить тему">🌓</button>
+                <a href="profile.html" class="icon-btn login-trigger" title="Профиль">👤</a>
+                <button class="icon-btn" id="cart-toggle" title="Корзина">
+                    🛒
+                    <span class="cart-count">0</span>
+                </button>
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Accessibility Panel -->
+    <div class="accessibility-panel">
+        <div class="accessibility-toggle">♿</div>
+        <div class="accessibility-option">
+            <input type="checkbox" id="font-size-large">
+            <label for="font-size-large">Крупный шрифт</label>
+        </div>
+        <div class="accessibility-option">
+            <input type="checkbox" id="high-contrast">
+            <label for="high-contrast">Высокий контраст</label>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Каталог товаров</h1>
+            <div class="breadcrumb">
+                <a href="index.html">Главная</a>
+                <span>/</span>
+                <span>Каталог</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Catalog Content -->
+    <section class="products">
+        <div class="container">
+            <!-- Filters -->
+            <div class="catalog-filters">
+                <button class="filter-btn active" data-category="all">Все товары</button>
+                <button class="filter-btn" data-category="skincare">Уход за кожей</button>
+                <button class="filter-btn" data-category="makeup">Макияж</button>
+                <button class="filter-btn" data-category="hair">Уход за волосами</button>
+                <button class="filter-btn" data-category="fragrance">Парфюмерия</button>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="products-grid">
+                <div class="product-card" data-category="skincare">
+                    <img src="https://placehold.co/300x300/1a1a25/ff0080?text=Cleanser" alt="Очищение" class="product-image">
+                    <div class="product-info">
+                        <span class="product-category">Уход за кожей</span>
+                        <h3 class="product-title">Очищающий гель</h3>
+                        <p class="product-price">1 590 ₽</p>
+                        <div class="product-actions">
+                            <button class="btn btn-primary add-to-cart" 
+                                data-product-id="101" 
+                                data-product-name="Очищающий гель" 
+                                data-product-price="1590">В корзину</button>
+                            <button class="btn btn-outline quick-view" data-product-id="101">👁</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" data-category="skincare">
+                    <img src="https://placehold.co/300x300/1a1a25/ff0080?text=Toner" alt="Тоник" class="product-image">
+                    <div class="product-info">
+                        <span class="product-category">Уход за кожей</span>
+                        <h3 class="product-title">Увлажняющий тоник</h3>
+                        <p class="product-price">1 290 ₽</p>
+                        <div class="product-actions">
+                            <button class="btn btn-primary add-to-cart" 
+                                data-product-id="102" 
+                                data-product-name="Увлажняющий тоник" 
+                                data-product-price="1290">В корзину</button>
+                            <button class="btn btn-outline quick-view" data-product-id="102">👁</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" data-category="skincare">
+                    <img src="https://placehold.co/300x300/1a1a25/ff0080?text=Serum" alt="Сыворотка" class="product-image">
+                    <div class="product-info">
+                        <span class="product-category">Уход за кожей</span>
+                        <h3 class="product-title">Витамин C сыворотка</h3>
+                        <p class="product-price">3 290 ₽</p>
+                        <div class="product-actions">
+                            <button class="btn btn-primary add-to-cart" 
+                                data-product-id="103" 
+                                data-product-name="Витамин C сыворотка" 
+                                data-product-price="3290">В корзину</button>
+                            <button class="btn btn-outline quick-view" data-product-id="103">👁</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" data-category="makeup">
+                    <img src="https://placehold.co/300x300/1a1a25/ff0080?text=Foundation" alt="Тональный" class="product-image">
+                    <div class="product-info">
+                        <span class="product-category">Макияж</span>
+                        <h3 class="product-title">Тональный крем</h3>
+                        <p class="product-price">2 490 ₽</p>
+                        <div class="product-actions">
+                            <button class="btn btn-primary add-to-cart" 
+                                data-product-id="201" 
+                                data-product-name="Тональный крем" 
+                                data-product-price="2490">В корзину</button>
+                            <button class="btn btn-outline quick-view" data-product-id="201">👁</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" data-category="makeup">
+                    <img src="https://placehold.co/300x300/1a1a25/ff0080?text=Eyeshadow" alt="Тени" class="product-image">
+                    <div class="product-info">
+                        <span class="product-category">Макияж</span>
+                        <h3 class="product-title">Палетка теней</h3>
+                        <p class="product-price">2 890 ₽</p>
+                        <div class="product-actions">
+                            <button class="btn btn-primary add-to-cart" 
+                                data-product-id="202" 
+                                data-product-name="Палетка теней" 
+                                data-product-price="2890">В корзину</button>
+                            <button class="btn btn-outline quick-view" data-product-id="202">👁</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" data-category="makeup">
+                    <img src="https://placehold.co/300x300/1a1a25/ff0080?text=Mascara" alt="Тушь" class="product-image">
+                    <div class="product-info">
+                        <span class="product-category">Макияж</span>
+                        <h3 class="product-title">Объёмная тушь</h3>
+                        <p class="product-price">1 690 ₽</p>
+                        <div class="product-actions">
+                            <button class="btn btn-primary add-to-cart" 
+                                data-product-id="203" 
+                                data-product-name="Объёмная тушь" 
+                                data-product-price="1690">В корзину</button>
+                            <button class="btn btn-outline quick-view" data-product-id="203">👁</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" data-category="hair">
+                    <img src="https://placehold.co/300x300/1a1a25/ff0080?text=Shampoo" alt="Шампунь" class="product-image">
+                    <div class="product-info">
+                        <span class="product-category">Уход за волосами</span>
+                        <h3 class="product-title">Восстанавливающий шампунь</h3>
+                        <p class="product-price">1 890 ₽</p>
+                        <div class="product-actions">
+                            <button class="btn btn-primary add-to-cart" 
+                                data-product-id="301" 
+                                data-product-name="Восстанавливающий шампунь" 
+                                data-product-price="1890">В корзину</button>
+                            <button class="btn btn-outline quick-view" data-product-id="301">👁</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" data-category="hair">
+                    <img src="https://placehold.co/300x300/1a1a25/ff0080?text=Mask" alt="Маска" class="product-image">
+                    <div class="product-info">
+                        <span class="product-category">Уход за волосами</span>
+                        <h3 class="product-title">Питательная маска</h3>
+                        <p class="product-price">2 190 ₽</p>
+                        <div class="product-actions">
+                            <button class="btn btn-primary add-to-cart" 
+                                data-product-id="302" 
+                                data-product-name="Питательная маска" 
+                                data-product-price="2190">В корзину</button>
+                            <button class="btn btn-outline quick-view" data-product-id="302">👁</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" data-category="fragrance">
+                    <img src="https://placehold.co/300x300/1a1a25/ff0080?text=Perfume" alt="Духи" class="product-image">
+                    <div class="product-info">
+                        <span class="product-category">Парфюмерия</span>
+                        <h3 class="product-title">Цветочный аромат</h3>
+                        <p class="product-price">5 990 ₽</p>
+                        <div class="product-actions">
+                            <button class="btn btn-primary add-to-cart" 
+                                data-product-id="401" 
+                                data-product-name="Цветочный аромат" 
+                                data-product-price="5990">В корзину</button>
+                            <button class="btn btn-outline quick-view" data-product-id="401">👁</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card" data-category="fragrance">
+                    <img src="https://placehold.co/300x300/1a1a25/ff0080?text=Body+Mist" alt="Мист" class="product-image">
+                    <div class="product-info">
+                        <span class="product-category">Парфюмерия</span>
+                        <h3 class="product-title">Боди мист</h3>
+                        <p class="product-price">2 490 ₽</p>
+                        <div class="product-actions">
+                            <button class="btn btn-primary add-to-cart" 
+                                data-product-id="402" 
+                                data-product-name="Боди мист" 
+                                data-product-price="2490">В корзину</button>
+                            <button class="btn btn-outline quick-view" data-product-id="402">👁</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-logo">GLOW</div>
+                    <p class="footer-desc">Твой проводник в мир премиальной косметики и красоты.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">📱</a>
+                        <a href="#" class="social-link">📷</a>
+                        <a href="#" class="social-link">🎬</a>
+                        <a href="#" class="social-link">💬</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer-title">Категории</h4>
+                    <ul class="footer-links">
+                        <li><a href="catalog.html?category=skincare">Уход за кожей</a></li>
+                        <li><a href="catalog.html?category=makeup">Макияж</a></li>
+                        <li><a href="catalog.html?category=hair">Уход за волосами</a></li>
+                        <li><a href="catalog.html?category=fragrance">Парфюмерия</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">Компания</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">О нас</a></li>
+                        <li><a href="services.html">Услуги</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">Контакты</h4>
+                    <ul class="footer-links">
+                        <li>📍 Москва, ул. Красоты, 1</li>
+                        <li>📞 +7 (999) 000-00-00</li>
+                        <li>✉️ hello@glowcosmetics.ru</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 GLOW Cosmetics. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar">
+        <div class="cart-header">
+            <h3>Корзина</h3>
+            <button class="modal-close" onclick="document.querySelector('.cart-sidebar').classList.remove('active'); document.querySelector('.overlay').classList.remove('active');">×</button>
+        </div>
+        <div class="cart-items"></div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Итого:</span>
+                <span class="cart-total-value">0 ₽</span>
+            </div>
+            <button class="btn btn-primary" id="checkout-btn" style="width: 100%;">Оформить заказ</button>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Вход в аккаунт</h3>
+                <button class="modal-close">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" required placeholder="your@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Пароль</label>
+                        <input type="password" id="login-password" required placeholder="••••••••">
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Войти</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Modal -->
+    <div class="modal" id="product-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Быстрый просмотр</h3>
+                <button class="modal-close">×</button>
+            </div>
+            <div class="modal-body">
+                <p style="text-align: center; color: var(--text-secondary);">Детали товара загружаются...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay"></div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

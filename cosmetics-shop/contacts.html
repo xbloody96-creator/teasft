@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GLOW Cosmetics - Контакты</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;600;700&family=Unbounded:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-content">
+            <a href="index.html" class="logo">GLOW</a>
+            
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Главная</a></li>
+                    <li><a href="catalog.html" class="nav-link">Каталог</a></li>
+                    <li><a href="services.html" class="nav-link">Услуги</a></li>
+                    <li><a href="about.html" class="nav-link">О нас</a></li>
+                    <li><a href="contacts.html" class="nav-link active">Контакты</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <button class="icon-btn" id="theme-toggle" title="Переключить тему">🌓</button>
+                <a href="profile.html" class="icon-btn login-trigger" title="Профиль">👤</a>
+                <button class="icon-btn" id="cart-toggle" title="Корзина">
+                    🛒
+                    <span class="cart-count">0</span>
+                </button>
+                <div class="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Accessibility Panel -->
+    <div class="accessibility-panel">
+        <div class="accessibility-toggle">♿</div>
+        <div class="accessibility-option">
+            <input type="checkbox" id="font-size-large">
+            <label for="font-size-large">Крупный шрифт</label>
+        </div>
+        <div class="accessibility-option">
+            <input type="checkbox" id="high-contrast">
+            <label for="high-contrast">Высокий контраст</label>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Контакты</h1>
+            <div class="breadcrumb">
+                <a href="index.html">Главная</a>
+                <span>/</span>
+                <span>Контакты</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacts Content -->
+    <section style="padding: 50px 0;">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;">
+                <!-- Contact Info -->
+                <div>
+                    <h2 style="font-size: 2rem; margin-bottom: 1.5rem;">Свяжитесь с нами</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 2rem;">Мы всегда рады ответить на ваши вопросы и помочь с выбором продукции.</p>
+                    
+                    <div style="margin-bottom: 2rem;">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                            <div style="width: 50px; height: 50px; background: var(--bg-card); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">📍</div>
+                            <div>
+                                <h4 style="margin-bottom: 0.25rem;">Адрес</h4>
+                                <p style="color: var(--text-secondary);">Москва, ул. Красоты, 1</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                            <div style="width: 50px; height: 50px; background: var(--bg-card); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">📞</div>
+                            <div>
+                                <h4 style="margin-bottom: 0.25rem;">Телефон</h4>
+                                <p style="color: var(--text-secondary);">+7 (999) 000-00-00</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                            <div style="width: 50px; height: 50px; background: var(--bg-card); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">✉️</div>
+                            <div>
+                                <h4 style="margin-bottom: 0.25rem;">Email</h4>
+                                <p style="color: var(--text-secondary);">hello@glowcosmetics.ru</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                            <div style="width: 50px; height: 50px; background: var(--bg-card); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">⏰</div>
+                            <div>
+                                <h4 style="margin-bottom: 0.25rem;">Режим работы</h4>
+                                <p style="color: var(--text-secondary);">Ежедневно 10:00 - 22:00</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Media -->
+                    <h3 style="margin-bottom: 1rem;">Мы в соцсетях</h3>
+                    <div class="social-links" style="gap: 1.5rem;">
+                        <a href="#" class="social-link" style="width: 50px; height: 50px; font-size: 1.5rem;">📱</a>
+                        <a href="#" class="social-link" style="width: 50px; height: 50px; font-size: 1.5rem;">📷</a>
+                        <a href="#" class="social-link" style="width: 50px; height: 50px; font-size: 1.5rem;">🎬</a>
+                        <a href="#" class="social-link" style="width: 50px; height: 50px; font-size: 1.5rem;">💬</a>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div style="background: var(--bg-card); border-radius: 20px; padding: 2rem;">
+                    <h2 style="font-size: 1.5rem; margin-bottom: 1.5rem;">Напишите нам</h2>
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label for="contact-name">Имя</label>
+                            <input type="text" id="contact-name" required placeholder="Ваше имя">
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-email">Email</label>
+                            <input type="email" id="contact-email" required placeholder="your@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-phone">Телефон</label>
+                            <input type="tel" id="contact-phone" placeholder="+7 (___) ___-__-__">
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-subject">Тема</label>
+                            <select id="contact-subject" required>
+                                <option value="">Выберите тему</option>
+                                <option value="order">Вопрос по заказу</option>
+                                <option value="product">Вопрос о продукте</option>
+                                <option value="service">Запись на услугу</option>
+                                <option value="cooperation">Сотрудничество</option>
+                                <option value="other">Другое</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-message">Сообщение</label>
+                            <textarea id="contact-message" rows="5" required placeholder="Ваш вопрос..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Отправить сообщение</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Map -->
+            <div style="margin-top: 4rem;">
+                <h2 style="text-align: center; font-size: 2rem; margin-bottom: 2rem;">Наши магазины</h2>
+                <div style="background: var(--bg-card); border-radius: 20px; padding: 2rem; text-align: center;">
+                    <img src="https://placehold.co/1200x400/1a1a25/ff0080?text=Map+Placeholder" alt="Карта магазинов" style="width: 100%; border-radius: 10px;">
+                    <p style="color: var(--text-secondary); margin-top: 1rem;">📍 Москва, Санкт-Петербург, Казань, Екатеринбург, Новосибирск</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-logo">GLOW</div>
+                    <p class="footer-desc">Твой проводник в мир премиальной косметики и красоты.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">📱</a>
+                        <a href="#" class="social-link">📷</a>
+                        <a href="#" class="social-link">🎬</a>
+                        <a href="#" class="social-link">💬</a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer-title">Категории</h4>
+                    <ul class="footer-links">
+                        <li><a href="catalog.html?category=skincare">Уход за кожей</a></li>
+                        <li><a href="catalog.html?category=makeup">Макияж</a></li>
+                        <li><a href="catalog.html?category=hair">Уход за волосами</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">Компания</h4>
+                    <ul class="footer-links">
+                        <li><a href="about.html">О нас</a></li>
+                        <li><a href="services.html">Услуги</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title">Контакты</h4>
+                    <ul class="footer-links">
+                        <li>📍 Москва, ул. Красоты, 1</li>
+                        <li>📞 +7 (999) 000-00-00</li>
+                        <li>✉️ hello@glowcosmetics.ru</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 GLOW Cosmetics. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Overlay -->
+    <div class="overlay"></div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
